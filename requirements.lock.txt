@@ -1,5 +1,3 @@
-## !! Could not determine repository location
--e /Users/camille/Documents/Playground/brain-tumor-segmentation
 filelock==4.2.4
 fsspec==2026.9.0
 importlib_resources==7.1.0

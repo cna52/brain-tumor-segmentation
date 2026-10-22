@@ -15,7 +15,7 @@ The commands below run from the repository root on Python 3.11. Keep data and mo
 ```bash
 python3.11 -m venv .venv
 .venv/bin/python -m pip install -e '.[test]'
-.venv/bin/python -m pip freeze --all > requirements.lock.txt
+.venv/bin/python -m pip list --format=freeze | grep -v '^brain-tumor-segmentation==' > requirements.lock.txt
 mkdir -p ../brain-tumor-data
 curl -L --fail --continue-at - -o ../brain-tumor-data/Task01_BrainTumour.tar https://msd-for-monai.s3-us-west-2.amazonaws.com/Task01_BrainTumour.tar
 .venv/bin/python scripts/prepare_data.py --archive ../brain-tumor-data/Task01_BrainTumour.tar --out ../brain-tumor-data --delete-archive
