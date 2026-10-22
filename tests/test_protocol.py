@@ -1,6 +1,7 @@
 import numpy as np
 
-from brain_tumor.data import check_split, make_split, normalize, restore_mask
+from brain_tumor.data import check_split, make_split, normalize, restore_mask, save_mask
+from brain_tumor.inference import sam_refine, unet_probability
 from brain_tumor.metrics import boxes_from_mask, cleanup, patient_metrics
 from brain_tumor.model import UNet
 
@@ -38,3 +39,29 @@ def test_normalization_and_model_shape():
     norm = normalize(image)
     assert norm[0] == 0 and norm.min() >= 0 and norm.max() <= 1
     assert UNet(16)(torch.zeros(2, 1, 128, 128)).shape == (2, 1, 128, 128)
+
+
+def test_inference_requires_no_ground_truth_and_preserves_nifti_grid(tmp_path):
+    import nibabel as nib
+    import torch
+    image = np.zeros((16, 20, 3), np.float32)
+    image[4:12, 5:15, :] = 10
+    model = UNet(16).eval()
+    prob, _ = unet_probability(model, image, 32, "cpu", 2)
+    assert prob.shape == (3, 32, 32)
+    restored = restore_mask(prob > .5, image.shape)
+    affine = np.array([[2, 0, 0, -40], [0, 2, 0, -50], [0, 0, 5, 10], [0, 0, 0, 1]], float)
+    path = tmp_path / "mask.nii.gz"
+    save_mask(restored, affine, nib.Nifti1Header(), path)
+    saved = nib.load(str(path))
+    assert saved.shape == image.shape
+    assert np.allclose(saved.affine, affine)
+
+
+def test_sam_empty_candidates_skip_model_calls():
+    class FailPredictor:
+        def set_image(self, image):
+            raise AssertionError("SAM should not run without a candidate")
+    pred, times = sam_refine(np.zeros((2, 16, 16)), np.zeros((16, 16, 2)),
+                             FailPredictor(), .5, 0, 4)
+    assert not pred.any() and times == []

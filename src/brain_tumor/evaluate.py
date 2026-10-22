@@ -10,7 +10,7 @@ from pathlib import Path
 import numpy as np
 import torch
 
-from .data import check_split, load_volume, read_cases, restore_mask, save_mask
+from .data import check_split, load_volume, read_cases, resize_slice, restore_mask, save_mask
 from .inference import sam_refine, threshold_probability, unet_probability
 from .metrics import patient_metrics
 from .model import UNet
@@ -80,7 +80,8 @@ def main():
         _, threshold, min_pixels = max(candidates)
         flair_candidates = []
         for threshold_flair in np.arange(.2, .81, .1):
-            rows = [score(np.stack([sl >= threshold_flair for sl in norm.transpose(2, 0, 1)]), truth, affine)
+            rows = [score(np.stack([resize_slice(norm[:, :, z], cfg["image_size"]).numpy() >= threshold_flair
+                                    for z in range(norm.shape[2])]), truth, affine)
                     for _, _, norm, truth, affine in records]
             flair_candidates.append((mean_dice(rows), float(threshold_flair)))
         _, flair_threshold = max(flair_candidates)
@@ -122,10 +123,8 @@ def main():
         prob, norm = unet_probability(model, image, cfg["image_size"], device, cfg["batch_size"])
         raw = np.stack([sl >= selection["unet_threshold"] for sl in prob])
         cleaned = threshold_probability(prob, selection["unet_threshold"], selection["minimum_component_pixels"])
-        flair = np.stack([sl >= selection["flair_threshold"] for sl in norm.transpose(2, 0, 1)])
-        # FLAIR baseline is resized to the same working resolution.
-        from .data import resize_slice
-        flair = np.stack([resize_slice(sl, cfg["image_size"], True).numpy() > 0 for sl in flair])
+        flair = np.stack([resize_slice(norm[:, :, z], cfg["image_size"]).numpy() >= selection["flair_threshold"]
+                          for z in range(norm.shape[2])])
         sam, sam_times = sam_refine(prob, norm, predictor, selection["unet_threshold"],
                                     selection["minimum_component_pixels"], selection["box_padding_pixels"],
                                     cfg["max_boxes_per_slice"])
