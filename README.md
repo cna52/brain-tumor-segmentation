@@ -8,6 +8,8 @@ The idea builds on a course team's conceptual exploration of brain-tumour segmen
 
 MSD lists its data under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) and asks users to cite the challenge. Cite: Antonelli et al., *The Medical Segmentation Decathlon*, Nature Communications 13, 4128 (2022), https://doi.org/10.1038/s41467-022-30695-9. The 484 labelled training cases support this study; the separate 266 unlabelled test cases do not. The pipeline asserts the FLAIR channel and tumour label definitions in `dataset.json` before use. [MONAI publishes](https://github.com/Project-MONAI/MONAI/blob/dev/monai/apps/datasets.py) the archive URL and MD5 `240a19d752f0d9e9101544901065d872`.
 
+SAM citation: Kirillov et al., *Segment Anything*, ICCV (2023), [official code and model](https://github.com/facebookresearch/segment-anything).
+
 ## Setup and reproduction
 
 The commands below run from the repository root on Python 3.11. Keep data and model checkpoints outside Git. The working directory examples put the dataset beside the repository.
