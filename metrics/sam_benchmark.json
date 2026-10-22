@@ -1,0 +1,31 @@
+{
+  "hardware": "macOS-26.5-arm64-arm-64bit",
+  "device": "mps",
+  "n": 8,
+  "seconds_per_slice_median": 0.8275857497937977,
+  "seconds_per_slice_mean": 1.8308085781754926,
+  "max_observed_device_allocated_bytes": 3980247040,
+  "projected_72_patients_155_slices_hours": 5.675506592344027,
+  "times": [
+    8.580997708719224,
+    1.1309485002420843,
+    0.8264473746530712,
+    0.8287241249345243,
+    0.8411046671681106,
+    0.8213864169083536,
+    0.8154570828191936,
+    0.8014027499593794
+  ],
+  "code_commit": "56f1ffe",
+  "split_sha256": "f47ad61669a733ca531e89ade8499483cc739bedcdf9355e302caf170826697b",
+  "config_sha256": "536ed17bff7d48744fcab1e93e673c3251abad9715b91ae6a146045870bc2f76",
+  "lockfile_sha256": "9f1f69cb2b35c52baa45d4b733347af6a8f809bf48981c58b7c03042b52fcf4c",
+  "sam_checkpoint_sha256": "ec2df62732614e57411cdcf32a23ffdf28910380d03139ee0f4fcbe91eb8c912",
+  "validation_patients": [
+    "BRATS_003",
+    "BRATS_008"
+  ],
+  "first_call_seconds": 8.580997708719224,
+  "steady_seconds_per_slice_mean": 0.8664958452406738,
+  "projected_steady_all_slices_hours": 2.6861371202460886
+}

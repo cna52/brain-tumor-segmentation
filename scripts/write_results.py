@@ -46,7 +46,7 @@ def main():
     lines.extend(["", "## Compute and limitations", "",
                   f"The SAM benchmark used {bench['n']} validation slices; mean {bench['seconds_per_slice_mean']:.3f} s/slice, "
                   f"median {bench['seconds_per_slice_median']:.3f} s/slice, maximum observed device allocation {bench['max_observed_device_allocated_bytes']} bytes. "
-                  f"An all-slice projection was {bench['projected_72_patients_155_slices_hours']:.2f} hours; actual SAM times per patient are in `artifacts/results.json`.",
+                  f"The first call took {bench['first_call_seconds']:.3f} s. A steady all-slice projection was {bench['projected_steady_all_slices_hours']:.2f} hours; actual SAM times per patient are in `artifacts/results.json`.",
                   "Only FLAIR is used. This is a 2D model evaluated on a fixed patient split of one public dataset; "+
                   "the original unlabelled MSD test set has no labels for this evaluation. Box prompts are generated from U-Net predictions, " +
                   "so missed tumours cannot be recovered when a slice has no U-Net candidate. SAM was trained on natural images and was used frozen. " +

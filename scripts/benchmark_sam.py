@@ -47,8 +47,11 @@ def main():
     result = {"hardware": platform.platform(), "device": device, "n": len(times),
               "seconds_per_slice_median": float(np.median(times)),
               "seconds_per_slice_mean": float(np.mean(times)),
+              "first_call_seconds": times[0],
+              "steady_seconds_per_slice_mean": float(np.mean(times[1:])),
               "max_observed_device_allocated_bytes": peak,
               "projected_72_patients_155_slices_hours": float(np.mean(times)*72*155/3600),
+              "projected_steady_all_slices_hours": float(np.mean(times[1:])*72*155/3600),
               "times": times}
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2) + "\n")
