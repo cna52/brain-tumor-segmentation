@@ -1,0 +1,2653 @@
+{
+  "split_sha256": "f47ad61669a733ca531e89ade8499483cc739bedcdf9355e302caf170826697b",
+  "config_sha256": "536ed17bff7d48744fcab1e93e673c3251abad9715b91ae6a146045870bc2f76",
+  "lockfile_sha256": "9f1f69cb2b35c52baa45d4b733347af6a8f809bf48981c58b7c03042b52fcf4c",
+  "selection_sha256": "5f3654174d83ab286d63135bb5f01a16d47e09b2868c8c348168fe4b01a73e8a",
+  "checkpoint_sha256": "ff291f6f769a9535d504feeb660c1c64b392ab9b905f379a5284c8991de6fdf5",
+  "sam_checkpoint_sha256": "ec2df62732614e57411cdcf32a23ffdf28910380d03139ee0f4fcbe91eb8c912",
+  "code_commit": "567bd37c0edde5c87d187f3f9a6926eb05c4ea09",
+  "training_metadata": {
+    "epoch": 11,
+    "val_loss": 0.19340540291121042,
+    "seed": 20261021,
+    "device": "mps",
+    "config_sha256": "536ed17bff7d48744fcab1e93e673c3251abad9715b91ae6a146045870bc2f76",
+    "split_sha256": "f47ad61669a733ca531e89ade8499483cc739bedcdf9355e302caf170826697b",
+    "commit": "8645960e6dbfb8df2398ab6f652b6085a4ea565d",
+    "torch": "2.7.1",
+    "smoke": false,
+    "original_recorded_commit": "a2f349ab83a25c43bdebe5c91fa1df763795f7f6",
+    "lockfile_sha256": "9f1f69cb2b35c52baa45d4b733347af6a8f809bf48981c58b7c03042b52fcf4c",
+    "provenance_note": "Training began at commit 8645960; the running version read HEAD at checkpoint save. Corrected after run; model weights unchanged."
+  },
+  "hardware": "macOS-26.5-arm64-arm-64bit",
+  "device": "mps",
+  "n_test": 72,
+  "aggregate": {
+    "flair": {
+      "dice": 0.5547388137096521,
+      "recall": 0.7414646882837079,
+      "false_positive_ml": 138.26090277777777
+    },
+    "unet": {
+      "dice": 0.793103120940263,
+      "recall": 0.7768313657943927,
+      "false_positive_ml": 12.850055555555555
+    },
+    "unet_cleaned": {
+      "dice": 0.7930809365388927,
+      "recall": 0.7749232500573667,
+      "false_positive_ml": 12.614694444444446
+    },
+    "unet_sam": {
+      "dice": 0.7565706806803617,
+      "recall": 0.8113308388203833,
+      "false_positive_ml": 31.846583333333335
+    }
+  },
+  "paired": {
+    "sam_minus_unet_dice": -0.0365324402599012,
+    "sam_minus_cleaned_dice": -0.03651025585853083,
+    "sam_minus_cleaned_dice_median": -0.04054561911173926,
+    "sam_improved_patient_count": 13,
+    "sam_worsened_patient_count": 59,
+    "sam_minus_cleaned_dice_bootstrap_95_ci": [
+      -0.048857445269851064,
+      -0.02405689785018096
+    ]
+  },
+  "patients": [
+    {
+      "patient": "BRATS_001",
+      "slice_count": 155,
+      "sam_prompted_slices": 66,
+      "sam_seconds": 53.683866038918495,
+      "metrics": {
+        "flair": {
+          "dice": 0.8317683957517075,
+          "recall": 0.7619580394543697,
+          "false_positive_ml": 7.841,
+          "predicted_ml": 92.97,
+          "truth_ml": 111.724
+        },
+        "unet": {
+          "dice": 0.863272764886391,
+          "recall": 0.8964054276610218,
+          "false_positive_ml": 20.150000000000002,
+          "predicted_ml": 120.3,
+          "truth_ml": 111.724
+        },
+        "unet_cleaned": {
+          "dice": 0.8631394727313482,
+          "recall": 0.8961279581826644,
+          "false_positive_ml": 20.145,
+          "predicted_ml": 120.264,
+          "truth_ml": 111.724
+        },
+        "unet_sam": {
+          "dice": 0.7954595447408542,
+          "recall": 0.9386613440263506,
+          "false_positive_ml": 47.079,
+          "predicted_ml": 151.95000000000002,
+          "truth_ml": 111.724
+        }
+      }
+    },
+    {
+      "patient": "BRATS_006",
+      "slice_count": 155,
+      "sam_prompted_slices": 71,
+      "sam_seconds": 63.681311453692615,
+      "metrics": {
+        "flair": {
+          "dice": 0.7369283862962512,
+          "recall": 0.5997589241761325,
+          "false_positive_ml": 6.079,
+          "predicted_ml": 136.442,
+          "truth_ml": 217.359
+        },
+        "unet": {
+          "dice": 0.7082391289873406,
+          "recall": 0.5627832295879167,
+          "false_positive_ml": 5.752,
+          "predicted_ml": 128.078,
+          "truth_ml": 217.359
+        },
+        "unet_cleaned": {
+          "dice": 0.7071912202273168,
+          "recall": 0.561495038162671,
+          "false_positive_ml": 5.752,
+          "predicted_ml": 127.798,
+          "truth_ml": 217.359
+        },
+        "unet_sam": {
+          "dice": 0.7675743221644241,
+          "recall": 0.7291071453217948,
+          "false_positive_ml": 37.095,
+          "predicted_ml": 195.573,
+          "truth_ml": 217.359
+        }
+      }
+    },
+    {
+      "patient": "BRATS_007",
+      "slice_count": 155,
+      "sam_prompted_slices": 57,
+      "sam_seconds": 53.57947237743065,
+      "metrics": {
+        "flair": {
+          "dice": 0.29416085391455643,
+          "recall": 0.9244167962674961,
+          "false_positive_ml": 266.373,
+          "predicted_ml": 322.841,
+          "truth_ml": 61.085
+        },
+        "unet": {
+          "dice": 0.8008925481070174,
+          "recall": 0.8901858066628469,
+          "false_positive_ml": 20.329,
+          "predicted_ml": 74.706,
+          "truth_ml": 61.085
+        },
+        "unet_cleaned": {
+          "dice": 0.8002243343762914,
+          "recall": 0.8876156175820578,
+          "false_positive_ml": 20.207,
+          "predicted_ml": 74.427,
+          "truth_ml": 61.085
+        },
+        "unet_sam": {
+          "dice": 0.7943513457000329,
+          "recall": 0.8706720144061554,
+          "false_positive_ml": 19.638,
+          "predicted_ml": 72.82300000000001,
+          "truth_ml": 61.085
+        }
+      }
+    },
+    {
+      "patient": "BRATS_010",
+      "slice_count": 155,
+      "sam_prompted_slices": 32,
+      "sam_seconds": 30.49001420335844,
+      "metrics": {
+        "flair": {
+          "dice": 0.04863134865866562,
+          "recall": 0.9949724215356079,
+          "false_positive_ml": 797.436,
+          "predicted_ml": 817.82,
+          "truth_ml": 20.487000000000002
+        },
+        "unet": {
+          "dice": 0.7967859438611528,
+          "recall": 0.9075511299848684,
+          "false_positive_ml": 7.59,
+          "predicted_ml": 26.183,
+          "truth_ml": 20.487000000000002
+        },
+        "unet_cleaned": {
+          "dice": 0.8048917748917749,
+          "recall": 0.9075511299848684,
+          "false_positive_ml": 7.12,
+          "predicted_ml": 25.713,
+          "truth_ml": 20.487000000000002
+        },
+        "unet_sam": {
+          "dice": 0.7423072157283879,
+          "recall": 0.8772392248743105,
+          "false_positive_ml": 9.963000000000001,
+          "predicted_ml": 27.935000000000002,
+          "truth_ml": 20.487000000000002
+        }
+      }
+    },
+    {
+      "patient": "BRATS_026",
+      "slice_count": 155,
+      "sam_prompted_slices": 51,
+      "sam_seconds": 49.200917376205325,
+      "metrics": {
+        "flair": {
+          "dice": 0.34929852666326855,
+          "recall": 0.9322547209535841,
+          "false_positive_ml": 210.28300000000002,
+          "predicted_ml": 267.846,
+          "truth_ml": 61.746
+        },
+        "unet": {
+          "dice": 0.8024047972780528,
+          "recall": 0.8440870663686717,
+          "false_positive_ml": 16.042,
+          "predicted_ml": 68.161,
+          "truth_ml": 61.746
+        },
+        "unet_cleaned": {
+          "dice": 0.8022717289953687,
+          "recall": 0.8430505619797234,
+          "false_positive_ml": 15.968,
+          "predicted_ml": 68.023,
+          "truth_ml": 61.746
+        },
+        "unet_sam": {
+          "dice": 0.8562464216191458,
+          "recall": 0.9082693615780779,
+          "false_positive_ml": 13.167,
+          "predicted_ml": 69.249,
+          "truth_ml": 61.746
+        }
+      }
+    },
+    {
+      "patient": "BRATS_028",
+      "slice_count": 155,
+      "sam_prompted_slices": 46,
+      "sam_seconds": 54.58167054131627,
+      "metrics": {
+        "flair": {
+          "dice": 0.22839899144330877,
+          "recall": 0.8583592886566864,
+          "false_positive_ml": 450.509,
+          "predicted_ml": 518.855,
+          "truth_ml": 79.624
+        },
+        "unet": {
+          "dice": 0.5150536879781037,
+          "recall": 0.4608535115040691,
+          "false_positive_ml": 26.171,
+          "predicted_ml": 62.866,
+          "truth_ml": 79.624
+        },
+        "unet_cleaned": {
+          "dice": 0.516647742099287,
+          "recall": 0.46001205666633177,
+          "false_positive_ml": 25.539,
+          "predicted_ml": 62.167,
+          "truth_ml": 79.624
+        },
+        "unet_sam": {
+          "dice": 0.5420696902390676,
+          "recall": 0.5701044911082086,
+          "false_positive_ml": 42.466,
+          "predicted_ml": 87.86,
+          "truth_ml": 79.624
+        }
+      }
+    },
+    {
+      "patient": "BRATS_029",
+      "slice_count": 155,
+      "sam_prompted_slices": 68,
+      "sam_seconds": 85.52788658346981,
+      "metrics": {
+        "flair": {
+          "dice": 0.052699933236565105,
+          "recall": 0.8399152991000529,
+          "false_positive_ml": 567.37,
+          "predicted_ml": 583.236,
+          "truth_ml": 18.89
+        },
+        "unet": {
+          "dice": 0.22910607339193984,
+          "recall": 0.7401799894123875,
+          "false_positive_ml": 89.185,
+          "predicted_ml": 103.167,
+          "truth_ml": 18.89
+        },
+        "unet_cleaned": {
+          "dice": 0.23234597648622823,
+          "recall": 0.7401799894123875,
+          "false_positive_ml": 87.483,
+          "predicted_ml": 101.465,
+          "truth_ml": 18.89
+        },
+        "unet_sam": {
+          "dice": 0.13341285632574443,
+          "recall": 0.7223398623610375,
+          "false_positive_ml": 172.018,
+          "predicted_ml": 185.663,
+          "truth_ml": 18.89
+        }
+      }
+    },
+    {
+      "patient": "BRATS_032",
+      "slice_count": 155,
+      "sam_prompted_slices": 73,
+      "sam_seconds": 86.09180283918977,
+      "metrics": {
+        "flair": {
+          "dice": 0.5906789961031964,
+          "recall": 0.4195278015093265,
+          "false_positive_ml": 0.217,
+          "predicted_ml": 94.5,
+          "truth_ml": 224.73600000000002
+        },
+        "unet": {
+          "dice": 0.854892803142259,
+          "recall": 0.7786513954150648,
+          "false_positive_ml": 9.66,
+          "predicted_ml": 184.651,
+          "truth_ml": 224.73600000000002
+        },
+        "unet_cleaned": {
+          "dice": 0.8545823015036803,
+          "recall": 0.7777525630072618,
+          "false_positive_ml": 9.538,
+          "predicted_ml": 184.327,
+          "truth_ml": 224.73600000000002
+        },
+        "unet_sam": {
+          "dice": 0.8294334837274638,
+          "recall": 0.9051242346575538,
+          "false_positive_ml": 62.339,
+          "predicted_ml": 265.753,
+          "truth_ml": 224.73600000000002
+        }
+      }
+    },
+    {
+      "patient": "BRATS_044",
+      "slice_count": 155,
+      "sam_prompted_slices": 64,
+      "sam_seconds": 71.31112420745194,
+      "metrics": {
+        "flair": {
+          "dice": 0.6637016840058555,
+          "recall": 0.737154346423075,
+          "false_positive_ml": 19.506,
+          "predicted_ml": 49.203,
+          "truth_ml": 40.286
+        },
+        "unet": {
+          "dice": 0.8442182119701035,
+          "recall": 0.9098197885121382,
+          "false_positive_ml": 9.894,
+          "predicted_ml": 46.547000000000004,
+          "truth_ml": 40.286
+        },
+        "unet_cleaned": {
+          "dice": 0.8453531942452699,
+          "recall": 0.9072134240182693,
+          "false_positive_ml": 9.634,
+          "predicted_ml": 46.182,
+          "truth_ml": 40.286
+        },
+        "unet_sam": {
+          "dice": 0.7108553802349034,
+          "recall": 0.7436578463982525,
+          "false_positive_ml": 14.045,
+          "predicted_ml": 44.004,
+          "truth_ml": 40.286
+        }
+      }
+    },
+    {
+      "patient": "BRATS_047",
+      "slice_count": 155,
+      "sam_prompted_slices": 58,
+      "sam_seconds": 63.36377366166562,
+      "metrics": {
+        "flair": {
+          "dice": 0.6188550901864873,
+          "recall": 0.5169472588790357,
+          "false_positive_ml": 24.076,
+          "predicted_ml": 105.047,
+          "truth_ml": 156.633
+        },
+        "unet": {
+          "dice": 0.8077726671476672,
+          "recall": 0.686183626694247,
+          "false_positive_ml": 2.0,
+          "predicted_ml": 109.479,
+          "truth_ml": 156.633
+        },
+        "unet_cleaned": {
+          "dice": 0.8057955302593985,
+          "recall": 0.68332343758978,
+          "false_positive_ml": 1.989,
+          "predicted_ml": 109.02,
+          "truth_ml": 156.633
+        },
+        "unet_sam": {
+          "dice": 0.8601997284309666,
+          "recall": 0.8554136101587788,
+          "false_positive_ml": 20.904,
+          "predicted_ml": 154.89000000000001,
+          "truth_ml": 156.633
+        }
+      }
+    },
+    {
+      "patient": "BRATS_049",
+      "slice_count": 155,
+      "sam_prompted_slices": 73,
+      "sam_seconds": 78.0607385803014,
+      "metrics": {
+        "flair": {
+          "dice": 0.2588329709019364,
+          "recall": 0.6224599063651758,
+          "false_positive_ml": 255.977,
+          "predicted_ml": 305.968,
+          "truth_ml": 80.312
+        },
+        "unet": {
+          "dice": 0.3546524229756928,
+          "recall": 0.570450244048212,
+          "false_positive_ml": 132.234,
+          "predicted_ml": 178.048,
+          "truth_ml": 80.312
+        },
+        "unet_cleaned": {
+          "dice": 0.3529448290850383,
+          "recall": 0.5661918517780655,
+          "false_positive_ml": 131.888,
+          "predicted_ml": 177.36,
+          "truth_ml": 80.312
+        },
+        "unet_sam": {
+          "dice": 0.34619778781407706,
+          "recall": 0.7640452236278514,
+          "false_positive_ml": 212.817,
+          "predicted_ml": 274.17900000000003,
+          "truth_ml": 80.312
+        }
+      }
+    },
+    {
+      "patient": "BRATS_052",
+      "slice_count": 155,
+      "sam_prompted_slices": 57,
+      "sam_seconds": 59.743972377851605,
+      "metrics": {
+        "flair": {
+          "dice": 0.8314296241709653,
+          "recall": 0.7188060779171135,
+          "false_positive_ml": 0.968,
+          "predicted_ml": 68.663,
+          "truth_ml": 94.177
+        },
+        "unet": {
+          "dice": 0.9278216034770679,
+          "recall": 0.8760843942788579,
+          "false_positive_ml": 1.167,
+          "predicted_ml": 83.674,
+          "truth_ml": 94.177
+        },
+        "unet_cleaned": {
+          "dice": 0.9277492563498445,
+          "recall": 0.8759569746328721,
+          "false_positive_ml": 1.167,
+          "predicted_ml": 83.662,
+          "truth_ml": 94.177
+        },
+        "unet_sam": {
+          "dice": 0.8871492985971944,
+          "recall": 0.8273039064739799,
+          "false_positive_ml": 3.5580000000000003,
+          "predicted_ml": 81.471,
+          "truth_ml": 94.177
+        }
+      }
+    },
+    {
+      "patient": "BRATS_053",
+      "slice_count": 155,
+      "sam_prompted_slices": 57,
+      "sam_seconds": 61.29312000144273,
+      "metrics": {
+        "flair": {
+          "dice": 0.7245781018839764,
+          "recall": 0.744992461770407,
+          "false_positive_ml": 23.13,
+          "predicted_ml": 78.474,
+          "truth_ml": 74.288
+        },
+        "unet": {
+          "dice": 0.8228498724056417,
+          "recall": 0.7660995046306267,
+          "false_positive_ml": 7.1290000000000004,
+          "predicted_ml": 64.041,
+          "truth_ml": 74.288
+        },
+        "unet_cleaned": {
+          "dice": 0.8211667706957367,
+          "recall": 0.7615092612534999,
+          "false_positive_ml": 6.923,
+          "predicted_ml": 63.494,
+          "truth_ml": 74.288
+        },
+        "unet_sam": {
+          "dice": 0.7611163641145419,
+          "recall": 0.8180863665733362,
+          "false_positive_ml": 24.635,
+          "predicted_ml": 85.409,
+          "truth_ml": 74.288
+        }
+      }
+    },
+    {
+      "patient": "BRATS_055",
+      "slice_count": 155,
+      "sam_prompted_slices": 69,
+      "sam_seconds": 75.3119720062241,
+      "metrics": {
+        "flair": {
+          "dice": 0.8231764571166839,
+          "recall": 0.7415517075384763,
+          "false_positive_ml": 8.744,
+          "predicted_ml": 116.57600000000001,
+          "truth_ml": 145.41400000000002
+        },
+        "unet": {
+          "dice": 0.9056385459558102,
+          "recall": 0.8719793142338427,
+          "false_positive_ml": 7.807,
+          "predicted_ml": 134.605,
+          "truth_ml": 145.41400000000002
+        },
+        "unet_cleaned": {
+          "dice": 0.9049907974911996,
+          "recall": 0.8707208384337134,
+          "false_positive_ml": 7.7860000000000005,
+          "predicted_ml": 134.401,
+          "truth_ml": 145.41400000000002
+        },
+        "unet_sam": {
+          "dice": 0.8321994906934688,
+          "recall": 0.9304056005611564,
+          "false_positive_ml": 44.44,
+          "predicted_ml": 179.734,
+          "truth_ml": 145.41400000000002
+        }
+      }
+    },
+    {
+      "patient": "BRATS_056",
+      "slice_count": 155,
+      "sam_prompted_slices": 72,
+      "sam_seconds": 73.85667283413932,
+      "metrics": {
+        "flair": {
+          "dice": 0.8410067039065853,
+          "recall": 0.7875484594291581,
+          "false_positive_ml": 12.633000000000001,
+          "predicted_ml": 129.239,
+          "truth_ml": 148.062
+        },
+        "unet": {
+          "dice": 0.9221754093447384,
+          "recall": 0.903979414029258,
+          "false_positive_ml": 8.374,
+          "predicted_ml": 142.219,
+          "truth_ml": 148.062
+        },
+        "unet_cleaned": {
+          "dice": 0.9220620319086238,
+          "recall": 0.9034323459091461,
+          "false_positive_ml": 8.315,
+          "predicted_ml": 142.079,
+          "truth_ml": 148.062
+        },
+        "unet_sam": {
+          "dice": 0.8326943206275653,
+          "recall": 0.956376382866637,
+          "false_positive_ml": 50.443,
+          "predicted_ml": 192.046,
+          "truth_ml": 148.062
+        }
+      }
+    },
+    {
+      "patient": "BRATS_059",
+      "slice_count": 155,
+      "sam_prompted_slices": 57,
+      "sam_seconds": 57.89981975313276,
+      "metrics": {
+        "flair": {
+          "dice": 0.6764734271539159,
+          "recall": 0.527905271721118,
+          "false_positive_ml": 3.271,
+          "predicted_ml": 55.834,
+          "truth_ml": 99.569
+        },
+        "unet": {
+          "dice": 0.9163164050608574,
+          "recall": 0.8615733812732879,
+          "false_positive_ml": 1.8860000000000001,
+          "predicted_ml": 87.672,
+          "truth_ml": 99.569
+        },
+        "unet_cleaned": {
+          "dice": 0.9155781687581503,
+          "recall": 0.8602677540198255,
+          "false_positive_ml": 1.883,
+          "predicted_ml": 87.539,
+          "truth_ml": 99.569
+        },
+        "unet_sam": {
+          "dice": 0.8885396107208929,
+          "recall": 0.8658417780634535,
+          "false_positive_ml": 8.271,
+          "predicted_ml": 94.482,
+          "truth_ml": 99.569
+        }
+      }
+    },
+    {
+      "patient": "BRATS_061",
+      "slice_count": 155,
+      "sam_prompted_slices": 55,
+      "sam_seconds": 55.76065775100142,
+      "metrics": {
+        "flair": {
+          "dice": 0.8113815747709366,
+          "recall": 0.6867828101305121,
+          "false_positive_ml": 0.51,
+          "predicted_ml": 58.026,
+          "truth_ml": 83.747
+        },
+        "unet": {
+          "dice": 0.9325125937152547,
+          "recall": 0.8963186741017589,
+          "false_positive_ml": 2.182,
+          "predicted_ml": 77.246,
+          "truth_ml": 83.747
+        },
+        "unet_cleaned": {
+          "dice": 0.9325125937152547,
+          "recall": 0.8963186741017589,
+          "false_positive_ml": 2.182,
+          "predicted_ml": 77.246,
+          "truth_ml": 83.747
+        },
+        "unet_sam": {
+          "dice": 0.8755928168108524,
+          "recall": 0.821199565357565,
+          "false_positive_ml": 4.569,
+          "predicted_ml": 73.342,
+          "truth_ml": 83.747
+        }
+      }
+    },
+    {
+      "patient": "BRATS_062",
+      "slice_count": 155,
+      "sam_prompted_slices": 52,
+      "sam_seconds": 54.378698628395796,
+      "metrics": {
+        "flair": {
+          "dice": 0.43469579516091145,
+          "recall": 0.5173148827619947,
+          "false_positive_ml": 49.382,
+          "predicted_ml": 78.99,
+          "truth_ml": 57.234
+        },
+        "unet": {
+          "dice": 0.5942893671425528,
+          "recall": 0.5360275360799525,
+          "false_positive_ml": 15.333,
+          "predicted_ml": 46.012,
+          "truth_ml": 57.234
+        },
+        "unet_cleaned": {
+          "dice": 0.5905696482017565,
+          "recall": 0.5257539224936226,
+          "false_positive_ml": 14.58,
+          "predicted_ml": 44.671,
+          "truth_ml": 57.234
+        },
+        "unet_sam": {
+          "dice": 0.5325657834334087,
+          "recall": 0.5067442429325226,
+          "false_positive_ml": 22.681,
+          "predicted_ml": 51.684000000000005,
+          "truth_ml": 57.234
+        }
+      }
+    },
+    {
+      "patient": "BRATS_073",
+      "slice_count": 155,
+      "sam_prompted_slices": 60,
+      "sam_seconds": 62.94849103828892,
+      "metrics": {
+        "flair": {
+          "dice": 0.4912717234944209,
+          "recall": 0.8621803327905094,
+          "false_positive_ml": 181.126,
+          "predicted_ml": 275.896,
+          "truth_ml": 109.919
+        },
+        "unet": {
+          "dice": 0.8459229278959585,
+          "recall": 0.8024181442698715,
+          "false_positive_ml": 10.412,
+          "predicted_ml": 98.613,
+          "truth_ml": 109.919
+        },
+        "unet_cleaned": {
+          "dice": 0.8451183304026981,
+          "recall": 0.8001710350348893,
+          "false_positive_ml": 10.273,
+          "predicted_ml": 98.227,
+          "truth_ml": 109.919
+        },
+        "unet_sam": {
+          "dice": 0.6992018578311673,
+          "recall": 0.8244798442489469,
+          "false_positive_ml": 58.682,
+          "predicted_ml": 149.308,
+          "truth_ml": 109.919
+        }
+      }
+    },
+    {
+      "patient": "BRATS_079",
+      "slice_count": 155,
+      "sam_prompted_slices": 57,
+      "sam_seconds": 60.71958312578499,
+      "metrics": {
+        "flair": {
+          "dice": 0.2981907913269158,
+          "recall": 0.8909250053303109,
+          "false_positive_ml": 363.992,
+          "predicted_ml": 443.385,
+          "truth_ml": 89.113
+        },
+        "unet": {
+          "dice": 0.8228767550702029,
+          "recall": 0.7398808254687869,
+          "false_positive_ml": 5.204,
+          "predicted_ml": 71.137,
+          "truth_ml": 89.113
+        },
+        "unet_cleaned": {
+          "dice": 0.8226169219684867,
+          "recall": 0.7367163040184934,
+          "false_positive_ml": 4.851,
+          "predicted_ml": 70.502,
+          "truth_ml": 89.113
+        },
+        "unet_sam": {
+          "dice": 0.7831453009392874,
+          "recall": 0.8373862399425449,
+          "false_positive_ml": 26.835,
+          "predicted_ml": 101.45700000000001,
+          "truth_ml": 89.113
+        }
+      }
+    },
+    {
+      "patient": "BRATS_088",
+      "slice_count": 155,
+      "sam_prompted_slices": 77,
+      "sam_seconds": 79.28474757820368,
+      "metrics": {
+        "flair": {
+          "dice": 0.5927867501136245,
+          "recall": 0.8276523960049504,
+          "false_positive_ml": 244.773,
+          "predicted_ml": 454.76,
+          "truth_ml": 253.714
+        },
+        "unet": {
+          "dice": 0.636646454267826,
+          "recall": 0.48355234634273236,
+          "false_positive_ml": 9.009,
+          "predicted_ml": 131.693,
+          "truth_ml": 253.714
+        },
+        "unet_cleaned": {
+          "dice": 0.6349051637417451,
+          "recall": 0.4801114640894866,
+          "false_positive_ml": 8.189,
+          "predicted_ml": 130.0,
+          "truth_ml": 253.714
+        },
+        "unet_sam": {
+          "dice": 0.6939920325607004,
+          "recall": 0.6334140015923442,
+          "false_positive_ml": 48.715,
+          "predicted_ml": 209.421,
+          "truth_ml": 253.714
+        }
+      }
+    },
+    {
+      "patient": "BRATS_092",
+      "slice_count": 155,
+      "sam_prompted_slices": 55,
+      "sam_seconds": 56.62912595970556,
+      "metrics": {
+        "flair": {
+          "dice": 0.2633936451162775,
+          "recall": 0.7177667462269374,
+          "false_positive_ml": 411.267,
+          "predicted_ml": 490.357,
+          "truth_ml": 110.18900000000001
+        },
+        "unet": {
+          "dice": 0.510048356905158,
+          "recall": 0.3560881757707212,
+          "false_positive_ml": 4.43,
+          "predicted_ml": 43.667,
+          "truth_ml": 110.18900000000001
+        },
+        "unet_cleaned": {
+          "dice": 0.5076029822804364,
+          "recall": 0.35187722912450425,
+          "false_positive_ml": 3.807,
+          "predicted_ml": 42.58,
+          "truth_ml": 110.18900000000001
+        },
+        "unet_sam": {
+          "dice": 0.571284683667959,
+          "recall": 0.42723865358611113,
+          "false_positive_ml": 7.545,
+          "predicted_ml": 54.622,
+          "truth_ml": 110.18900000000001
+        }
+      }
+    },
+    {
+      "patient": "BRATS_111",
+      "slice_count": 155,
+      "sam_prompted_slices": 50,
+      "sam_seconds": 51.223920543212444,
+      "metrics": {
+        "flair": {
+          "dice": 0.8037620889189486,
+          "recall": 0.7206190268880734,
+          "false_positive_ml": 6.994,
+          "predicted_ml": 76.515,
+          "truth_ml": 96.474
+        },
+        "unet": {
+          "dice": 0.9415331869073766,
+          "recall": 0.9108982731098534,
+          "false_positive_ml": 2.318,
+          "predicted_ml": 90.196,
+          "truth_ml": 96.474
+        },
+        "unet_cleaned": {
+          "dice": 0.9414765359596198,
+          "recall": 0.9106287704459233,
+          "false_positive_ml": 2.3000000000000003,
+          "predicted_ml": 90.152,
+          "truth_ml": 96.474
+        },
+        "unet_sam": {
+          "dice": 0.8775264907489828,
+          "recall": 0.904336919791861,
+          "false_positive_ml": 15.124,
+          "predicted_ml": 102.369,
+          "truth_ml": 96.474
+        }
+      }
+    },
+    {
+      "patient": "BRATS_113",
+      "slice_count": 155,
+      "sam_prompted_slices": 70,
+      "sam_seconds": 71.85213366756216,
+      "metrics": {
+        "flair": {
+          "dice": 0.8107827750422676,
+          "recall": 0.7531991314631842,
+          "false_positive_ml": 16.741,
+          "predicted_ml": 137.109,
+          "truth_ml": 159.809
+        },
+        "unet": {
+          "dice": 0.8851269891629235,
+          "recall": 0.8292336476669023,
+          "false_positive_ml": 7.107,
+          "predicted_ml": 139.626,
+          "truth_ml": 159.809
+        },
+        "unet_cleaned": {
+          "dice": 0.8850807730972317,
+          "recall": 0.8291460430889375,
+          "false_positive_ml": 7.105,
+          "predicted_ml": 139.61,
+          "truth_ml": 159.809
+        },
+        "unet_sam": {
+          "dice": 0.8490141034476962,
+          "recall": 0.9481380898447521,
+          "false_positive_ml": 45.604,
+          "predicted_ml": 197.125,
+          "truth_ml": 159.809
+        }
+      }
+    },
+    {
+      "patient": "BRATS_120",
+      "slice_count": 155,
+      "sam_prompted_slices": 46,
+      "sam_seconds": 46.90643591247499,
+      "metrics": {
+        "flair": {
+          "dice": 0.3101654640818337,
+          "recall": 0.6627554179566564,
+          "false_positive_ml": 84.32900000000001,
+          "predicted_ml": 105.736,
+          "truth_ml": 32.3
+        },
+        "unet": {
+          "dice": 0.66189764661935,
+          "recall": 0.5485758513931889,
+          "false_positive_ml": 3.521,
+          "predicted_ml": 21.240000000000002,
+          "truth_ml": 32.3
+        },
+        "unet_cleaned": {
+          "dice": 0.6504418095310022,
+          "recall": 0.5332817337461301,
+          "false_positive_ml": 3.439,
+          "predicted_ml": 20.664,
+          "truth_ml": 32.3
+        },
+        "unet_sam": {
+          "dice": 0.668236952409214,
+          "recall": 0.5577399380804954,
+          "false_positive_ml": 3.603,
+          "predicted_ml": 21.618000000000002,
+          "truth_ml": 32.3
+        }
+      }
+    },
+    {
+      "patient": "BRATS_130",
+      "slice_count": 155,
+      "sam_prompted_slices": 48,
+      "sam_seconds": 48.258124250452965,
+      "metrics": {
+        "flair": {
+          "dice": 0.14691158676006977,
+          "recall": 0.9700192389910218,
+          "false_positive_ml": 630.714,
+          "predicted_ml": 685.167,
+          "truth_ml": 56.136
+        },
+        "unet": {
+          "dice": 0.88128245483418,
+          "recall": 0.8329058001995154,
+          "false_positive_ml": 3.217,
+          "predicted_ml": 49.973,
+          "truth_ml": 56.136
+        },
+        "unet_cleaned": {
+          "dice": 0.8818701298701299,
+          "recall": 0.8316232007980618,
+          "false_positive_ml": 3.055,
+          "predicted_ml": 49.739000000000004,
+          "truth_ml": 56.136
+        },
+        "unet_sam": {
+          "dice": 0.8413788493993015,
+          "recall": 0.8970001425110447,
+          "false_positive_ml": 13.204,
+          "predicted_ml": 63.558,
+          "truth_ml": 56.136
+        }
+      }
+    },
+    {
+      "patient": "BRATS_133",
+      "slice_count": 155,
+      "sam_prompted_slices": 36,
+      "sam_seconds": 36.38189833285287,
+      "metrics": {
+        "flair": {
+          "dice": 0.7017925354321617,
+          "recall": 0.608709440512752,
+          "false_positive_ml": 7.55,
+          "predicted_ml": 44.019,
+          "truth_ml": 59.912
+        },
+        "unet": {
+          "dice": 0.813264794629606,
+          "recall": 0.6905461343303512,
+          "false_positive_ml": 0.459,
+          "predicted_ml": 41.831,
+          "truth_ml": 59.912
+        },
+        "unet_cleaned": {
+          "dice": 0.8127071551512172,
+          "recall": 0.6896114300974763,
+          "false_positive_ml": 0.447,
+          "predicted_ml": 41.763,
+          "truth_ml": 59.912
+        },
+        "unet_sam": {
+          "dice": 0.7236828474941471,
+          "recall": 0.5830217652557084,
+          "false_positive_ml": 1.692,
+          "predicted_ml": 36.622,
+          "truth_ml": 59.912
+        }
+      }
+    },
+    {
+      "patient": "BRATS_144",
+      "slice_count": 155,
+      "sam_prompted_slices": 54,
+      "sam_seconds": 54.077027830760926,
+      "metrics": {
+        "flair": {
+          "dice": 0.6937066367650151,
+          "recall": 0.7718730505302558,
+          "false_positive_ml": 23.262,
+          "predicted_ml": 62.856,
+          "truth_ml": 51.296
+        },
+        "unet": {
+          "dice": 0.9086643980428085,
+          "recall": 0.8797372114784778,
+          "false_positive_ml": 2.903,
+          "predicted_ml": 48.03,
+          "truth_ml": 51.296
+        },
+        "unet_cleaned": {
+          "dice": 0.9086643980428085,
+          "recall": 0.8797372114784778,
+          "false_positive_ml": 2.903,
+          "predicted_ml": 48.03,
+          "truth_ml": 51.296
+        },
+        "unet_sam": {
+          "dice": 0.8421104487905808,
+          "recall": 0.8331058951965066,
+          "false_positive_ml": 7.464,
+          "predicted_ml": 50.199,
+          "truth_ml": 51.296
+        }
+      }
+    },
+    {
+      "patient": "BRATS_156",
+      "slice_count": 155,
+      "sam_prompted_slices": 99,
+      "sam_seconds": 100.8741915835999,
+      "metrics": {
+        "flair": {
+          "dice": 0.5977503732199321,
+          "recall": 0.8075934810342659,
+          "false_positive_ml": 199.13,
+          "predicted_ml": 378.91,
+          "truth_ml": 222.612
+        },
+        "unet": {
+          "dice": 0.7496589181870529,
+          "recall": 0.6491608718308087,
+          "false_positive_ml": 18.415,
+          "predicted_ml": 162.92600000000002,
+          "truth_ml": 222.612
+        },
+        "unet_cleaned": {
+          "dice": 0.7469684215464243,
+          "recall": 0.6437658347258908,
+          "false_positive_ml": 17.789,
+          "predicted_ml": 161.099,
+          "truth_ml": 222.612
+        },
+        "unet_sam": {
+          "dice": 0.7692157015592426,
+          "recall": 0.8643828724417372,
+          "false_positive_ml": 85.273,
+          "predicted_ml": 277.695,
+          "truth_ml": 222.612
+        }
+      }
+    },
+    {
+      "patient": "BRATS_158",
+      "slice_count": 155,
+      "sam_prompted_slices": 43,
+      "sam_seconds": 45.998202627990395,
+      "metrics": {
+        "flair": {
+          "dice": 0.2504885037389056,
+          "recall": 0.9099827358586371,
+          "false_positive_ml": 263.687,
+          "predicted_ml": 308.49,
+          "truth_ml": 49.235
+        },
+        "unet": {
+          "dice": 0.8974019971407995,
+          "recall": 0.8478521377069158,
+          "false_positive_ml": 2.054,
+          "predicted_ml": 43.798,
+          "truth_ml": 49.235
+        },
+        "unet_cleaned": {
+          "dice": 0.8978652470828629,
+          "recall": 0.8478521377069158,
+          "false_positive_ml": 2.0060000000000002,
+          "predicted_ml": 43.75,
+          "truth_ml": 49.235
+        },
+        "unet_sam": {
+          "dice": 0.8692097786661576,
+          "recall": 0.7860668223824515,
+          "false_positive_ml": 1.114,
+          "predicted_ml": 39.816,
+          "truth_ml": 49.235
+        }
+      }
+    },
+    {
+      "patient": "BRATS_161",
+      "slice_count": 155,
+      "sam_prompted_slices": 42,
+      "sam_seconds": 44.41321562230587,
+      "metrics": {
+        "flair": {
+          "dice": 0.29210132159317787,
+          "recall": 0.8214401812997483,
+          "false_positive_ml": 409.44800000000004,
+          "predicted_ml": 497.89,
+          "truth_ml": 107.667
+        },
+        "unet": {
+          "dice": 0.6441828414617117,
+          "recall": 0.49274150854022125,
+          "false_positive_ml": 3.992,
+          "predicted_ml": 57.044000000000004,
+          "truth_ml": 107.667
+        },
+        "unet_cleaned": {
+          "dice": 0.6395569176775955,
+          "recall": 0.48745669518051027,
+          "false_positive_ml": 3.973,
+          "predicted_ml": 56.456,
+          "truth_ml": 107.667
+        },
+        "unet_sam": {
+          "dice": 0.7134534300450995,
+          "recall": 0.6545738248488395,
+          "false_positive_ml": 19.42,
+          "predicted_ml": 89.896,
+          "truth_ml": 107.667
+        }
+      }
+    },
+    {
+      "patient": "BRATS_184",
+      "slice_count": 155,
+      "sam_prompted_slices": 65,
+      "sam_seconds": 67.48655990930274,
+      "metrics": {
+        "flair": {
+          "dice": 0.17452677637211073,
+          "recall": 0.7786718272560603,
+          "false_positive_ml": 210.436,
+          "predicted_ml": 233.371,
+          "truth_ml": 29.454
+        },
+        "unet": {
+          "dice": 0.7029011207263441,
+          "recall": 0.67287974468663,
+          "false_positive_ml": 7.119,
+          "predicted_ml": 26.938,
+          "truth_ml": 29.454
+        },
+        "unet_cleaned": {
+          "dice": 0.7044653243847875,
+          "recall": 0.6681944727371495,
+          "false_positive_ml": 6.74,
+          "predicted_ml": 26.421,
+          "truth_ml": 29.454
+        },
+        "unet_sam": {
+          "dice": 0.6285996828698573,
+          "recall": 0.6258572689617709,
+          "false_positive_ml": 10.763,
+          "predicted_ml": 29.197,
+          "truth_ml": 29.454
+        }
+      }
+    },
+    {
+      "patient": "BRATS_188",
+      "slice_count": 155,
+      "sam_prompted_slices": 53,
+      "sam_seconds": 55.1012531616725,
+      "metrics": {
+        "flair": {
+          "dice": 0.23341238471673253,
+          "recall": 0.7417932112550245,
+          "false_positive_ml": 165.302,
+          "predicted_ml": 191.876,
+          "truth_ml": 35.824
+        },
+        "unet": {
+          "dice": 0.6995524846576581,
+          "recall": 0.6698023671281822,
+          "false_positive_ml": 8.782,
+          "predicted_ml": 32.777,
+          "truth_ml": 35.824
+        },
+        "unet_cleaned": {
+          "dice": 0.6941375505700625,
+          "recall": 0.6585529254131308,
+          "false_positive_ml": 8.559000000000001,
+          "predicted_ml": 32.151,
+          "truth_ml": 35.824
+        },
+        "unet_sam": {
+          "dice": 0.629679320232552,
+          "recall": 0.6681554265297007,
+          "false_positive_ml": 16.266000000000002,
+          "predicted_ml": 40.202,
+          "truth_ml": 35.824
+        }
+      }
+    },
+    {
+      "patient": "BRATS_196",
+      "slice_count": 155,
+      "sam_prompted_slices": 74,
+      "sam_seconds": 89.2171274125576,
+      "metrics": {
+        "flair": {
+          "dice": 0.7893642944169713,
+          "recall": 0.7248610454646077,
+          "false_positive_ml": 18.671,
+          "predicted_ml": 139.82500000000002,
+          "truth_ml": 167.141
+        },
+        "unet": {
+          "dice": 0.939190951520303,
+          "recall": 0.9156101734463716,
+          "false_positive_ml": 5.712,
+          "predicted_ml": 158.748,
+          "truth_ml": 167.141
+        },
+        "unet_cleaned": {
+          "dice": 0.9396205562718732,
+          "recall": 0.9156101734463716,
+          "false_positive_ml": 5.563,
+          "predicted_ml": 158.599,
+          "truth_ml": 167.141
+        },
+        "unet_sam": {
+          "dice": 0.8511528337538364,
+          "recall": 0.9324941217295577,
+          "false_positive_ml": 43.229,
+          "predicted_ml": 199.08700000000002,
+          "truth_ml": 167.141
+        }
+      }
+    },
+    {
+      "patient": "BRATS_197",
+      "slice_count": 155,
+      "sam_prompted_slices": 65,
+      "sam_seconds": 72.30178099265322,
+      "metrics": {
+        "flair": {
+          "dice": 0.59992150926471,
+          "recall": 0.5667287508716798,
+          "false_positive_ml": 36.548,
+          "predicted_ml": 100.751,
+          "truth_ml": 113.287
+        },
+        "unet": {
+          "dice": 0.6479486204419657,
+          "recall": 0.5414566543380971,
+          "false_positive_ml": 14.709,
+          "predicted_ml": 76.049,
+          "truth_ml": 113.287
+        },
+        "unet_cleaned": {
+          "dice": 0.6442222328543558,
+          "recall": 0.5348539549992497,
+          "false_positive_ml": 14.23,
+          "predicted_ml": 74.822,
+          "truth_ml": 113.287
+        },
+        "unet_sam": {
+          "dice": 0.5913425458038565,
+          "recall": 0.5216573834597086,
+          "false_positive_ml": 27.490000000000002,
+          "predicted_ml": 86.587,
+          "truth_ml": 113.287
+        }
+      }
+    },
+    {
+      "patient": "BRATS_198",
+      "slice_count": 155,
+      "sam_prompted_slices": 70,
+      "sam_seconds": 82.61860650312155,
+      "metrics": {
+        "flair": {
+          "dice": 0.6648848873686263,
+          "recall": 0.5180972478483278,
+          "false_positive_ml": 7.306,
+          "predicted_ml": 101.093,
+          "truth_ml": 181.022
+        },
+        "unet": {
+          "dice": 0.7948851449809257,
+          "recall": 0.6704875650473423,
+          "false_positive_ml": 2.99,
+          "predicted_ml": 124.363,
+          "truth_ml": 181.022
+        },
+        "unet_cleaned": {
+          "dice": 0.7942453303103079,
+          "recall": 0.6695705494359802,
+          "false_positive_ml": 2.984,
+          "predicted_ml": 124.191,
+          "truth_ml": 181.022
+        },
+        "unet_sam": {
+          "dice": 0.9049960322055007,
+          "recall": 0.8851410325816752,
+          "false_positive_ml": 12.849,
+          "predicted_ml": 173.079,
+          "truth_ml": 181.022
+        }
+      }
+    },
+    {
+      "patient": "BRATS_203",
+      "slice_count": 155,
+      "sam_prompted_slices": 75,
+      "sam_seconds": 93.21512320777401,
+      "metrics": {
+        "flair": {
+          "dice": 0.8088360605392125,
+          "recall": 0.7391300910700733,
+          "false_positive_ml": 11.196,
+          "predicted_ml": 104.693,
+          "truth_ml": 126.49600000000001
+        },
+        "unet": {
+          "dice": 0.8999392400581042,
+          "recall": 0.8840279534530736,
+          "false_positive_ml": 10.197000000000001,
+          "predicted_ml": 122.023,
+          "truth_ml": 126.49600000000001
+        },
+        "unet_cleaned": {
+          "dice": 0.9003129442943045,
+          "recall": 0.8835694409309385,
+          "false_positive_ml": 10.023,
+          "predicted_ml": 121.791,
+          "truth_ml": 126.49600000000001
+        },
+        "unet_sam": {
+          "dice": 0.7847178839523599,
+          "recall": 0.918542878826208,
+          "false_positive_ml": 53.449,
+          "predicted_ml": 169.641,
+          "truth_ml": 126.49600000000001
+        }
+      }
+    },
+    {
+      "patient": "BRATS_205",
+      "slice_count": 155,
+      "sam_prompted_slices": 67,
+      "sam_seconds": 80.03014021599665,
+      "metrics": {
+        "flair": {
+          "dice": 0.6742978469551719,
+          "recall": 0.7360725989412654,
+          "false_positive_ml": 63.859,
+          "predicted_ml": 168.979,
+          "truth_ml": 142.812
+        },
+        "unet": {
+          "dice": 0.827273208626128,
+          "recall": 0.7658179984875221,
+          "false_positive_ml": 12.226,
+          "predicted_ml": 121.59400000000001,
+          "truth_ml": 142.812
+        },
+        "unet_cleaned": {
+          "dice": 0.8290009324327398,
+          "recall": 0.7657339719351315,
+          "false_positive_ml": 11.658,
+          "predicted_ml": 121.014,
+          "truth_ml": 142.812
+        },
+        "unet_sam": {
+          "dice": 0.8065931611111997,
+          "recall": 0.8849046298630368,
+          "false_positive_ml": 44.168,
+          "predicted_ml": 170.543,
+          "truth_ml": 142.812
+        }
+      }
+    },
+    {
+      "patient": "BRATS_208",
+      "slice_count": 155,
+      "sam_prompted_slices": 42,
+      "sam_seconds": 50.020668209996074,
+      "metrics": {
+        "flair": {
+          "dice": 0.7192385938455848,
+          "recall": 0.7573478742846871,
+          "false_positive_ml": 23.272000000000002,
+          "predicted_ml": 73.828,
+          "truth_ml": 66.754
+        },
+        "unet": {
+          "dice": 0.897337916699976,
+          "recall": 0.8407586062258442,
+          "false_positive_ml": 2.212,
+          "predicted_ml": 58.336,
+          "truth_ml": 66.754
+        },
+        "unet_cleaned": {
+          "dice": 0.8972423059696718,
+          "recall": 0.8402792342031938,
+          "false_positive_ml": 2.186,
+          "predicted_ml": 58.278,
+          "truth_ml": 66.754
+        },
+        "unet_sam": {
+          "dice": 0.8405688213758811,
+          "recall": 0.9217874584294574,
+          "false_positive_ml": 18.121,
+          "predicted_ml": 79.654,
+          "truth_ml": 66.754
+        }
+      }
+    },
+    {
+      "patient": "BRATS_210",
+      "slice_count": 155,
+      "sam_prompted_slices": 65,
+      "sam_seconds": 69.12278949934989,
+      "metrics": {
+        "flair": {
+          "dice": 0.6893882480481566,
+          "recall": 0.7584799849337713,
+          "false_positive_ml": 42.242,
+          "predicted_ml": 114.736,
+          "truth_ml": 95.578
+        },
+        "unet": {
+          "dice": 0.8561365193559438,
+          "recall": 0.8366988219046224,
+          "false_positive_ml": 11.268,
+          "predicted_ml": 91.238,
+          "truth_ml": 95.578
+        },
+        "unet_cleaned": {
+          "dice": 0.8560357579265547,
+          "recall": 0.8355793174161418,
+          "false_positive_ml": 11.147,
+          "predicted_ml": 91.01,
+          "truth_ml": 95.578
+        },
+        "unet_sam": {
+          "dice": 0.7956229946898687,
+          "recall": 0.8911988114419637,
+          "false_positive_ml": 33.362,
+          "predicted_ml": 118.541,
+          "truth_ml": 95.578
+        }
+      }
+    },
+    {
+      "patient": "BRATS_237",
+      "slice_count": 155,
+      "sam_prompted_slices": 58,
+      "sam_seconds": 60.1176474574022,
+      "metrics": {
+        "flair": {
+          "dice": 0.7985427419005074,
+          "recall": 0.6758516053249805,
+          "false_positive_ml": 2.067,
+          "predicted_ml": 84.921,
+          "truth_ml": 122.592
+        },
+        "unet": {
+          "dice": 0.9370232422647163,
+          "recall": 0.9183388801879405,
+          "false_positive_ml": 5.122,
+          "predicted_ml": 117.703,
+          "truth_ml": 122.592
+        },
+        "unet_cleaned": {
+          "dice": 0.9370678307812786,
+          "recall": 0.9175150091359958,
+          "false_positive_ml": 4.996,
+          "predicted_ml": 117.476,
+          "truth_ml": 122.592
+        },
+        "unet_sam": {
+          "dice": 0.8972805702171328,
+          "recall": 0.9200763508222396,
+          "false_positive_ml": 16.027,
+          "predicted_ml": 128.821,
+          "truth_ml": 122.592
+        }
+      }
+    },
+    {
+      "patient": "BRATS_247",
+      "slice_count": 155,
+      "sam_prompted_slices": 43,
+      "sam_seconds": 43.85151408286765,
+      "metrics": {
+        "flair": {
+          "dice": 0.7120700827225219,
+          "recall": 0.5717915450318953,
+          "false_positive_ml": 2.531,
+          "predicted_ml": 44.839,
+          "truth_ml": 73.992
+        },
+        "unet": {
+          "dice": 0.8241417322834645,
+          "recall": 0.7072791653151692,
+          "false_positive_ml": 0.675,
+          "predicted_ml": 53.008,
+          "truth_ml": 73.992
+        },
+        "unet_cleaned": {
+          "dice": 0.8232224910740323,
+          "recall": 0.7058060330846578,
+          "false_positive_ml": 0.661,
+          "predicted_ml": 52.885,
+          "truth_ml": 73.992
+        },
+        "unet_sam": {
+          "dice": 0.7971586300312645,
+          "recall": 0.6840198940425992,
+          "false_positive_ml": 2.3770000000000002,
+          "predicted_ml": 52.989000000000004,
+          "truth_ml": 73.992
+        }
+      }
+    },
+    {
+      "patient": "BRATS_271",
+      "slice_count": 155,
+      "sam_prompted_slices": 86,
+      "sam_seconds": 89.18203087663278,
+      "metrics": {
+        "flair": {
+          "dice": 0.8184936663463566,
+          "recall": 0.7665948717948718,
+          "false_positive_ml": 20.785,
+          "predicted_ml": 170.27100000000002,
+          "truth_ml": 195.0
+        },
+        "unet": {
+          "dice": 0.8809075024759228,
+          "recall": 0.9191230769230769,
+          "false_positive_ml": 32.69,
+          "predicted_ml": 211.919,
+          "truth_ml": 195.0
+        },
+        "unet_cleaned": {
+          "dice": 0.8806424103203672,
+          "recall": 0.9161435897435898,
+          "false_positive_ml": 32.074,
+          "predicted_ml": 210.722,
+          "truth_ml": 195.0
+        },
+        "unet_sam": {
+          "dice": 0.7492090789623116,
+          "recall": 0.9472615384615385,
+          "false_positive_ml": 113.38,
+          "predicted_ml": 298.096,
+          "truth_ml": 195.0
+        }
+      }
+    },
+    {
+      "patient": "BRATS_280",
+      "slice_count": 155,
+      "sam_prompted_slices": 76,
+      "sam_seconds": 74.64357416983694,
+      "metrics": {
+        "flair": {
+          "dice": 0.8351375685748984,
+          "recall": 0.8029412356813561,
+          "false_positive_ml": 23.834,
+          "predicted_ml": 183.372,
+          "truth_ml": 198.692
+        },
+        "unet": {
+          "dice": 0.8697430858147683,
+          "recall": 0.8463702615102772,
+          "false_positive_ml": 19.846,
+          "predicted_ml": 188.013,
+          "truth_ml": 198.692
+        },
+        "unet_cleaned": {
+          "dice": 0.8697883922311308,
+          "recall": 0.846002858695871,
+          "false_positive_ml": 19.731,
+          "predicted_ml": 187.82500000000002,
+          "truth_ml": 198.692
+        },
+        "unet_sam": {
+          "dice": 0.8328952077157235,
+          "recall": 0.9488051859158899,
+          "false_positive_ml": 65.474,
+          "predicted_ml": 253.994,
+          "truth_ml": 198.692
+        }
+      }
+    },
+    {
+      "patient": "BRATS_286",
+      "slice_count": 155,
+      "sam_prompted_slices": 66,
+      "sam_seconds": 63.58106615860015,
+      "metrics": {
+        "flair": {
+          "dice": 0.545250717285147,
+          "recall": 0.8737769477487719,
+          "false_positive_ml": 196.743,
+          "predicted_ml": 325.875,
+          "truth_ml": 147.786
+        },
+        "unet": {
+          "dice": 0.8449413774361364,
+          "recall": 0.7731517193780195,
+          "false_positive_ml": 8.412,
+          "predicted_ml": 122.673,
+          "truth_ml": 147.786
+        },
+        "unet_cleaned": {
+          "dice": 0.8449503185749733,
+          "recall": 0.7730569878066934,
+          "false_positive_ml": 8.39,
+          "predicted_ml": 122.637,
+          "truth_ml": 147.786
+        },
+        "unet_sam": {
+          "dice": 0.8871753386461041,
+          "recall": 0.8719364486487218,
+          "false_positive_ml": 13.849,
+          "predicted_ml": 142.709,
+          "truth_ml": 147.786
+        }
+      }
+    },
+    {
+      "patient": "BRATS_289",
+      "slice_count": 155,
+      "sam_prompted_slices": 47,
+      "sam_seconds": 44.734331246465445,
+      "metrics": {
+        "flair": {
+          "dice": 0.48819053266133017,
+          "recall": 0.7762132108539312,
+          "false_positive_ml": 116.139,
+          "predicted_ml": 180.359,
+          "truth_ml": 82.735
+        },
+        "unet": {
+          "dice": 0.753828804707335,
+          "recall": 0.7231280594669729,
+          "false_positive_ml": 16.168,
+          "predicted_ml": 75.996,
+          "truth_ml": 82.735
+        },
+        "unet_cleaned": {
+          "dice": 0.755639240266387,
+          "recall": 0.7227412824076872,
+          "false_positive_ml": 15.735000000000001,
+          "predicted_ml": 75.531,
+          "truth_ml": 82.735
+        },
+        "unet_sam": {
+          "dice": 0.7318944472429961,
+          "recall": 0.7990330573517859,
+          "false_positive_ml": 31.806,
+          "predicted_ml": 97.914,
+          "truth_ml": 82.735
+        }
+      }
+    },
+    {
+      "patient": "BRATS_291",
+      "slice_count": 155,
+      "sam_prompted_slices": 43,
+      "sam_seconds": 42.256236916873604,
+      "metrics": {
+        "flair": {
+          "dice": 0.32224264340459063,
+          "recall": 0.8837301508633507,
+          "false_positive_ml": 363.305,
+          "predicted_ml": 452.461,
+          "truth_ml": 100.886
+        },
+        "unet": {
+          "dice": 0.542516520657127,
+          "recall": 0.47970977142517296,
+          "false_positive_ml": 29.131,
+          "predicted_ml": 77.527,
+          "truth_ml": 100.886
+        },
+        "unet_cleaned": {
+          "dice": 0.5436257099274453,
+          "recall": 0.47865908054635925,
+          "false_positive_ml": 28.483,
+          "predicted_ml": 76.773,
+          "truth_ml": 100.886
+        },
+        "unet_sam": {
+          "dice": 0.5106642997957236,
+          "recall": 0.5674424598061178,
+          "false_positive_ml": 66.07300000000001,
+          "predicted_ml": 123.32000000000001,
+          "truth_ml": 100.886
+        }
+      }
+    },
+    {
+      "patient": "BRATS_298",
+      "slice_count": 155,
+      "sam_prompted_slices": 61,
+      "sam_seconds": 59.19959608186036,
+      "metrics": {
+        "flair": {
+          "dice": 0.7380700401203011,
+          "recall": 0.5963515498183505,
+          "false_positive_ml": 2.031,
+          "predicted_ml": 63.751000000000005,
+          "truth_ml": 103.496
+        },
+        "unet": {
+          "dice": 0.9013655188735061,
+          "recall": 0.9200162325114014,
+          "false_positive_ml": 12.561,
+          "predicted_ml": 107.779,
+          "truth_ml": 103.496
+        },
+        "unet_cleaned": {
+          "dice": 0.9013570975348745,
+          "recall": 0.9196200819355338,
+          "false_positive_ml": 12.513,
+          "predicted_ml": 107.69,
+          "truth_ml": 103.496
+        },
+        "unet_sam": {
+          "dice": 0.8958943949408146,
+          "recall": 0.9554282291103038,
+          "false_positive_ml": 18.368000000000002,
+          "predicted_ml": 117.251,
+          "truth_ml": 103.496
+        }
+      }
+    },
+    {
+      "patient": "BRATS_301",
+      "slice_count": 155,
+      "sam_prompted_slices": 44,
+      "sam_seconds": 47.06655879225582,
+      "metrics": {
+        "flair": {
+          "dice": 0.7101530801546361,
+          "recall": 0.7459267826611686,
+          "false_positive_ml": 14.112,
+          "predicted_ml": 43.779,
+          "truth_ml": 39.772
+        },
+        "unet": {
+          "dice": 0.8811976934372798,
+          "recall": 0.9279141104294478,
+          "false_positive_ml": 7.0840000000000005,
+          "predicted_ml": 43.989000000000004,
+          "truth_ml": 39.772
+        },
+        "unet_cleaned": {
+          "dice": 0.881128241902713,
+          "recall": 0.926832947802474,
+          "false_positive_ml": 7.0360000000000005,
+          "predicted_ml": 43.898,
+          "truth_ml": 39.772
+        },
+        "unet_sam": {
+          "dice": 0.7711396368861865,
+          "recall": 0.9040028160514935,
+          "false_positive_ml": 17.523,
+          "predicted_ml": 53.477000000000004,
+          "truth_ml": 39.772
+        }
+      }
+    },
+    {
+      "patient": "BRATS_302",
+      "slice_count": 155,
+      "sam_prompted_slices": 35,
+      "sam_seconds": 38.95681383507326,
+      "metrics": {
+        "flair": {
+          "dice": 0.17265983972901344,
+          "recall": 0.9875620403037733,
+          "false_positive_ml": 316.12600000000003,
+          "predicted_ml": 349.156,
+          "truth_ml": 33.446
+        },
+        "unet": {
+          "dice": 0.6667443275217126,
+          "recall": 0.7700771392692699,
+          "false_positive_ml": 18.057,
+          "predicted_ml": 43.813,
+          "truth_ml": 33.446
+        },
+        "unet_cleaned": {
+          "dice": 0.6733242706263725,
+          "recall": 0.7700771392692699,
+          "false_positive_ml": 17.302,
+          "predicted_ml": 43.058,
+          "truth_ml": 33.446
+        },
+        "unet_sam": {
+          "dice": 0.616361701397233,
+          "recall": 0.805208395622795,
+          "false_positive_ml": 27.01,
+          "predicted_ml": 53.941,
+          "truth_ml": 33.446
+        }
+      }
+    },
+    {
+      "patient": "BRATS_320",
+      "slice_count": 155,
+      "sam_prompted_slices": 70,
+      "sam_seconds": 74.22848187573254,
+      "metrics": {
+        "flair": {
+          "dice": 0.6037807963675001,
+          "recall": 0.4373096812056384,
+          "false_positive_ml": 2.0340000000000003,
+          "predicted_ml": 81.02,
+          "truth_ml": 180.618
+        },
+        "unet": {
+          "dice": 0.9083090181176631,
+          "recall": 0.8893299671129123,
+          "false_positive_ml": 12.441,
+          "predicted_ml": 173.07,
+          "truth_ml": 180.618
+        },
+        "unet_cleaned": {
+          "dice": 0.9075933177898001,
+          "recall": 0.8879458304266463,
+          "false_positive_ml": 12.419,
+          "predicted_ml": 172.798,
+          "truth_ml": 180.618
+        },
+        "unet_sam": {
+          "dice": 0.8687021231168209,
+          "recall": 0.9235845818246243,
+          "false_positive_ml": 36.624,
+          "predicted_ml": 203.44,
+          "truth_ml": 180.618
+        }
+      }
+    },
+    {
+      "patient": "BRATS_323",
+      "slice_count": 155,
+      "sam_prompted_slices": 57,
+      "sam_seconds": 55.95005308045074,
+      "metrics": {
+        "flair": {
+          "dice": 0.7899392500043024,
+          "recall": 0.7361356127914809,
+          "false_positive_ml": 7.9590000000000005,
+          "predicted_ml": 53.86,
+          "truth_ml": 62.354
+        },
+        "unet": {
+          "dice": 0.8890777329273186,
+          "recall": 0.9060525387304744,
+          "false_positive_ml": 8.239,
+          "predicted_ml": 64.735,
+          "truth_ml": 62.354
+        },
+        "unet_cleaned": {
+          "dice": 0.8886806862289687,
+          "recall": 0.9051063283831029,
+          "false_positive_ml": 8.222,
+          "predicted_ml": 64.659,
+          "truth_ml": 62.354
+        },
+        "unet_sam": {
+          "dice": 0.7866738694681774,
+          "recall": 0.8874651185168554,
+          "false_positive_ml": 22.995,
+          "predicted_ml": 78.33200000000001,
+          "truth_ml": 62.354
+        }
+      }
+    },
+    {
+      "patient": "BRATS_327",
+      "slice_count": 155,
+      "sam_prompted_slices": 62,
+      "sam_seconds": 61.18584849964827,
+      "metrics": {
+        "flair": {
+          "dice": 0.855348050658971,
+          "recall": 0.7587643490738325,
+          "false_positive_ml": 1.889,
+          "predicted_ml": 94.956,
+          "truth_ml": 122.656
+        },
+        "unet": {
+          "dice": 0.9139624794016986,
+          "recall": 0.9405491781894078,
+          "false_positive_ml": 14.428,
+          "predicted_ml": 129.792,
+          "truth_ml": 122.656
+        },
+        "unet_cleaned": {
+          "dice": 0.9140765068938709,
+          "recall": 0.9393996217062354,
+          "false_positive_ml": 14.229000000000001,
+          "predicted_ml": 129.452,
+          "truth_ml": 122.656
+        },
+        "unet_sam": {
+          "dice": 0.877657616797588,
+          "recall": 0.9623744456039656,
+          "false_positive_ml": 28.294,
+          "predicted_ml": 146.335,
+          "truth_ml": 122.656
+        }
+      }
+    },
+    {
+      "patient": "BRATS_329",
+      "slice_count": 155,
+      "sam_prompted_slices": 52,
+      "sam_seconds": 53.54997071111575,
+      "metrics": {
+        "flair": {
+          "dice": 0.6438862661717539,
+          "recall": 0.5667449089640297,
+          "false_positive_ml": 15.262,
+          "predicted_ml": 59.93,
+          "truth_ml": 78.815
+        },
+        "unet": {
+          "dice": 0.8243024337564162,
+          "recall": 0.8038190699739898,
+          "false_positive_ml": 11.545,
+          "predicted_ml": 74.898,
+          "truth_ml": 78.815
+        },
+        "unet_cleaned": {
+          "dice": 0.8263440965619098,
+          "recall": 0.8021823256994227,
+          "false_positive_ml": 10.982000000000001,
+          "predicted_ml": 74.206,
+          "truth_ml": 78.815
+        },
+        "unet_sam": {
+          "dice": 0.7401989897790071,
+          "recall": 0.830184609528643,
+          "false_positive_ml": 32.547000000000004,
+          "predicted_ml": 97.97800000000001,
+          "truth_ml": 78.815
+        }
+      }
+    },
+    {
+      "patient": "BRATS_330",
+      "slice_count": 155,
+      "sam_prompted_slices": 31,
+      "sam_seconds": 32.79061466595158,
+      "metrics": {
+        "flair": {
+          "dice": 0.4508440537314564,
+          "recall": 0.8022926500337154,
+          "false_positive_ml": 26.053,
+          "predicted_ml": 37.951,
+          "truth_ml": 14.83
+        },
+        "unet": {
+          "dice": 0.8105241448395746,
+          "recall": 0.9275118004045853,
+          "false_positive_ml": 5.356,
+          "predicted_ml": 19.111,
+          "truth_ml": 14.83
+        },
+        "unet_cleaned": {
+          "dice": 0.8170119178530032,
+          "recall": 0.9268374915711396,
+          "false_positive_ml": 5.072,
+          "predicted_ml": 18.817,
+          "truth_ml": 14.83
+        },
+        "unet_sam": {
+          "dice": 0.7653422982885085,
+          "recall": 0.8443020903573837,
+          "false_positive_ml": 5.369,
+          "predicted_ml": 17.89,
+          "truth_ml": 14.83
+        }
+      }
+    },
+    {
+      "patient": "BRATS_334",
+      "slice_count": 155,
+      "sam_prompted_slices": 65,
+      "sam_seconds": 66.10632091434672,
+      "metrics": {
+        "flair": {
+          "dice": 0.821424135720208,
+          "recall": 0.7136258121711946,
+          "false_positive_ml": 4.099,
+          "predicted_ml": 126.453,
+          "truth_ml": 171.454
+        },
+        "unet": {
+          "dice": 0.917791105172079,
+          "recall": 0.9233555355955533,
+          "false_positive_ml": 15.22,
+          "predicted_ml": 173.53300000000002,
+          "truth_ml": 171.454
+        },
+        "unet_cleaned": {
+          "dice": 0.9175022181499759,
+          "recall": 0.9227839537135325,
+          "false_positive_ml": 15.213000000000001,
+          "predicted_ml": 173.428,
+          "truth_ml": 171.454
+        },
+        "unet_sam": {
+          "dice": 0.8490281136167872,
+          "recall": 0.9543259416519883,
+          "false_positive_ml": 50.359,
+          "predicted_ml": 213.982,
+          "truth_ml": 171.454
+        }
+      }
+    },
+    {
+      "patient": "BRATS_345",
+      "slice_count": 155,
+      "sam_prompted_slices": 71,
+      "sam_seconds": 72.06995707610622,
+      "metrics": {
+        "flair": {
+          "dice": 0.8538081552002874,
+          "recall": 0.7819610101176278,
+          "false_positive_ml": 6.047,
+          "predicted_ml": 101.11,
+          "truth_ml": 121.57000000000001
+        },
+        "unet": {
+          "dice": 0.8719958772659051,
+          "recall": 0.9534177839927613,
+          "false_positive_ml": 28.366,
+          "predicted_ml": 144.273,
+          "truth_ml": 121.57000000000001
+        },
+        "unet_cleaned": {
+          "dice": 0.872460428620913,
+          "recall": 0.9530394011680513,
+          "false_positive_ml": 28.165,
+          "predicted_ml": 144.026,
+          "truth_ml": 121.57000000000001
+        },
+        "unet_sam": {
+          "dice": 0.7854494217915012,
+          "recall": 0.9400098708562968,
+          "false_positive_ml": 55.138,
+          "predicted_ml": 169.415,
+          "truth_ml": 121.57000000000001
+        }
+      }
+    },
+    {
+      "patient": "BRATS_349",
+      "slice_count": 155,
+      "sam_prompted_slices": 55,
+      "sam_seconds": 54.34414841560647,
+      "metrics": {
+        "flair": {
+          "dice": 0.8828413439654736,
+          "recall": 0.8846309779211784,
+          "false_positive_ml": 14.139000000000001,
+          "predicted_ml": 118.87400000000001,
+          "truth_ml": 118.394
+        },
+        "unet": {
+          "dice": 0.8898674968321262,
+          "recall": 0.9609101812591855,
+          "false_positive_ml": 23.532,
+          "predicted_ml": 137.298,
+          "truth_ml": 118.394
+        },
+        "unet_cleaned": {
+          "dice": 0.8899858404587379,
+          "recall": 0.9609101812591855,
+          "false_positive_ml": 23.498,
+          "predicted_ml": 137.264,
+          "truth_ml": 118.394
+        },
+        "unet_sam": {
+          "dice": 0.8721716445722195,
+          "recall": 0.9685794888254472,
+          "false_positive_ml": 29.894000000000002,
+          "predicted_ml": 144.568,
+          "truth_ml": 118.394
+        }
+      }
+    },
+    {
+      "patient": "BRATS_362",
+      "slice_count": 155,
+      "sam_prompted_slices": 45,
+      "sam_seconds": 44.14581970870495,
+      "metrics": {
+        "flair": {
+          "dice": 0.8280761816127102,
+          "recall": 0.7889136940103548,
+          "false_positive_ml": 7.3580000000000005,
+          "predicted_ml": 57.185,
+          "truth_ml": 63.159
+        },
+        "unet": {
+          "dice": 0.8968915904268137,
+          "recall": 0.9134565145109961,
+          "false_positive_ml": 7.799,
+          "predicted_ml": 65.492,
+          "truth_ml": 63.159
+        },
+        "unet_cleaned": {
+          "dice": 0.8982096549361036,
+          "recall": 0.9130923542171345,
+          "false_positive_ml": 7.582,
+          "predicted_ml": 65.252,
+          "truth_ml": 63.159
+        },
+        "unet_sam": {
+          "dice": 0.8928149819712021,
+          "recall": 0.8801279310945391,
+          "false_positive_ml": 5.776,
+          "predicted_ml": 61.364000000000004,
+          "truth_ml": 63.159
+        }
+      }
+    },
+    {
+      "patient": "BRATS_370",
+      "slice_count": 155,
+      "sam_prompted_slices": 53,
+      "sam_seconds": 53.194312503095716,
+      "metrics": {
+        "flair": {
+          "dice": 0.7572409595511862,
+          "recall": 0.6780163017723438,
+          "false_positive_ml": 4.758,
+          "predicted_ml": 33.373,
+          "truth_ml": 42.204
+        },
+        "unet": {
+          "dice": 0.8755060728744939,
+          "recall": 0.8813145673395887,
+          "false_positive_ml": 5.569,
+          "predicted_ml": 42.764,
+          "truth_ml": 42.204
+        },
+        "unet_cleaned": {
+          "dice": 0.8754531330916624,
+          "recall": 0.8812197895934035,
+          "false_positive_ml": 5.569,
+          "predicted_ml": 42.76,
+          "truth_ml": 42.204
+        },
+        "unet_sam": {
+          "dice": 0.8201141853315767,
+          "recall": 0.8849398161311725,
+          "false_positive_ml": 11.528,
+          "predicted_ml": 48.876,
+          "truth_ml": 42.204
+        }
+      }
+    },
+    {
+      "patient": "BRATS_377",
+      "slice_count": 155,
+      "sam_prompted_slices": 52,
+      "sam_seconds": 53.48221833538264,
+      "metrics": {
+        "flair": {
+          "dice": 0.8560260197535284,
+          "recall": 0.778951369844416,
+          "false_positive_ml": 3.0180000000000002,
+          "predicted_ml": 60.394,
+          "truth_ml": 73.658
+        },
+        "unet": {
+          "dice": 0.8948025844413586,
+          "recall": 0.9579543294686252,
+          "false_positive_ml": 13.494,
+          "predicted_ml": 84.055,
+          "truth_ml": 73.658
+        },
+        "unet_cleaned": {
+          "dice": 0.8948940569130956,
+          "recall": 0.9578457194059029,
+          "false_positive_ml": 13.468,
+          "predicted_ml": 84.021,
+          "truth_ml": 73.658
+        },
+        "unet_sam": {
+          "dice": 0.8441259558716088,
+          "recall": 0.9411469222623476,
+          "false_positive_ml": 21.267,
+          "predicted_ml": 90.59,
+          "truth_ml": 73.658
+        }
+      }
+    },
+    {
+      "patient": "BRATS_382",
+      "slice_count": 155,
+      "sam_prompted_slices": 40,
+      "sam_seconds": 39.00071079004556,
+      "metrics": {
+        "flair": {
+          "dice": 0.3000028194428781,
+          "recall": 0.6942324003392706,
+          "false_positive_ml": 89.937,
+          "predicted_ml": 111.218,
+          "truth_ml": 30.654
+        },
+        "unet": {
+          "dice": 0.825529141367363,
+          "recall": 0.7850525216937431,
+          "false_positive_ml": 3.583,
+          "predicted_ml": 27.648,
+          "truth_ml": 30.654
+        },
+        "unet_cleaned": {
+          "dice": 0.8291774443869633,
+          "recall": 0.7843022117831279,
+          "false_positive_ml": 3.294,
+          "predicted_ml": 27.336000000000002,
+          "truth_ml": 30.654
+        },
+        "unet_sam": {
+          "dice": 0.7811708576376974,
+          "recall": 0.7798329744894631,
+          "false_positive_ml": 6.644,
+          "predicted_ml": 30.549,
+          "truth_ml": 30.654
+        }
+      }
+    },
+    {
+      "patient": "BRATS_386",
+      "slice_count": 155,
+      "sam_prompted_slices": 60,
+      "sam_seconds": 58.754783916752785,
+      "metrics": {
+        "flair": {
+          "dice": 0.20572038077426047,
+          "recall": 0.8775711187015383,
+          "false_positive_ml": 533.78,
+          "predicted_ml": 604.177,
+          "truth_ml": 80.218
+        },
+        "unet": {
+          "dice": 0.6545483135466624,
+          "recall": 0.5189109676132538,
+          "false_positive_ml": 5.346,
+          "predicted_ml": 46.972,
+          "truth_ml": 80.218
+        },
+        "unet_cleaned": {
+          "dice": 0.6489900390671431,
+          "recall": 0.5104714652571742,
+          "false_positive_ml": 5.026,
+          "predicted_ml": 45.975,
+          "truth_ml": 80.218
+        },
+        "unet_sam": {
+          "dice": 0.6433264565503061,
+          "recall": 0.5889326585055723,
+          "false_positive_ml": 19.41,
+          "predicted_ml": 66.653,
+          "truth_ml": 80.218
+        }
+      }
+    },
+    {
+      "patient": "BRATS_409",
+      "slice_count": 155,
+      "sam_prompted_slices": 77,
+      "sam_seconds": 74.21671749884263,
+      "metrics": {
+        "flair": {
+          "dice": 0.8410907023813403,
+          "recall": 0.7276110053122181,
+          "false_positive_ml": 0.40700000000000003,
+          "predicted_ml": 116.557,
+          "truth_ml": 159.632
+        },
+        "unet": {
+          "dice": 0.9337598111255854,
+          "recall": 0.9811316026861782,
+          "false_positive_ml": 19.209,
+          "predicted_ml": 175.829,
+          "truth_ml": 159.632
+        },
+        "unet_cleaned": {
+          "dice": 0.9335381128474293,
+          "recall": 0.9804863686478902,
+          "false_positive_ml": 19.171,
+          "predicted_ml": 175.68800000000002,
+          "truth_ml": 159.632
+        },
+        "unet_sam": {
+          "dice": 0.8712848281861433,
+          "recall": 0.9631089004710834,
+          "false_positive_ml": 39.536,
+          "predicted_ml": 193.279,
+          "truth_ml": 159.632
+        }
+      }
+    },
+    {
+      "patient": "BRATS_413",
+      "slice_count": 155,
+      "sam_prompted_slices": 36,
+      "sam_seconds": 35.08882216690108,
+      "metrics": {
+        "flair": {
+          "dice": 0.11485428271575038,
+          "recall": 0.914654923012633,
+          "false_positive_ml": 435.91700000000003,
+          "predicted_ml": 464.37100000000004,
+          "truth_ml": 31.109
+        },
+        "unet": {
+          "dice": 0.59649715458774,
+          "recall": 0.7378893567777813,
+          "false_positive_ml": 22.902,
+          "predicted_ml": 45.857,
+          "truth_ml": 31.109
+        },
+        "unet_cleaned": {
+          "dice": 0.6008804108584006,
+          "recall": 0.737150020894275,
+          "false_positive_ml": 22.287,
+          "predicted_ml": 45.219,
+          "truth_ml": 31.109
+        },
+        "unet_sam": {
+          "dice": 0.6422270050377238,
+          "recall": 0.8728663730753158,
+          "false_positive_ml": 26.299,
+          "predicted_ml": 53.453,
+          "truth_ml": 31.109
+        }
+      }
+    },
+    {
+      "patient": "BRATS_414",
+      "slice_count": 155,
+      "sam_prompted_slices": 54,
+      "sam_seconds": 51.884159829467535,
+      "metrics": {
+        "flair": {
+          "dice": 0.2907354512352005,
+          "recall": 0.17011775813015909,
+          "false_positive_ml": 0.022,
+          "predicted_ml": 26.69,
+          "truth_ml": 156.762
+        },
+        "unet": {
+          "dice": 0.5618083590324014,
+          "recall": 0.3910514027634248,
+          "false_positive_ml": 0.167,
+          "predicted_ml": 61.469,
+          "truth_ml": 156.762
+        },
+        "unet_cleaned": {
+          "dice": 0.5591541989358625,
+          "recall": 0.3884870057794619,
+          "false_positive_ml": 0.167,
+          "predicted_ml": 61.067,
+          "truth_ml": 156.762
+        },
+        "unet_sam": {
+          "dice": 0.5518916178977927,
+          "recall": 0.3819994641558541,
+          "false_positive_ml": 0.365,
+          "predicted_ml": 60.248000000000005,
+          "truth_ml": 156.762
+        }
+      }
+    },
+    {
+      "patient": "BRATS_435",
+      "slice_count": 155,
+      "sam_prompted_slices": 74,
+      "sam_seconds": 72.0818535448052,
+      "metrics": {
+        "flair": {
+          "dice": 0.28476678037232894,
+          "recall": 0.9139189387359136,
+          "false_positive_ml": 399.346,
+          "predicted_ml": 480.36400000000003,
+          "truth_ml": 88.649
+        },
+        "unet": {
+          "dice": 0.8801885147848251,
+          "recall": 0.8258525194869655,
+          "false_positive_ml": 4.493,
+          "predicted_ml": 77.70400000000001,
+          "truth_ml": 88.649
+        },
+        "unet_cleaned": {
+          "dice": 0.8801855812972614,
+          "recall": 0.8239235637175828,
+          "false_positive_ml": 4.276,
+          "predicted_ml": 77.316,
+          "truth_ml": 88.649
+        },
+        "unet_sam": {
+          "dice": 0.879386863707156,
+          "recall": 0.8471274351656533,
+          "false_positive_ml": 7.048,
+          "predicted_ml": 82.145,
+          "truth_ml": 88.649
+        }
+      }
+    },
+    {
+      "patient": "BRATS_437",
+      "slice_count": 155,
+      "sam_prompted_slices": 65,
+      "sam_seconds": 63.496902043931186,
+      "metrics": {
+        "flair": {
+          "dice": 0.7570766181804585,
+          "recall": 0.6237321031107277,
+          "false_positive_ml": 3.117,
+          "predicted_ml": 84.10300000000001,
+          "truth_ml": 129.841
+        },
+        "unet": {
+          "dice": 0.8827754793585675,
+          "recall": 0.8816706587287528,
+          "false_positive_ml": 15.039,
+          "predicted_ml": 129.516,
+          "truth_ml": 129.841
+        },
+        "unet_cleaned": {
+          "dice": 0.8824894490329407,
+          "recall": 0.8801072080467649,
+          "false_positive_ml": 14.866,
+          "predicted_ml": 129.14000000000001,
+          "truth_ml": 129.841
+        },
+        "unet_sam": {
+          "dice": 0.7703900481127949,
+          "recall": 0.9224436041003997,
+          "false_positive_ml": 61.324,
+          "predicted_ml": 181.095,
+          "truth_ml": 129.841
+        }
+      }
+    },
+    {
+      "patient": "BRATS_447",
+      "slice_count": 155,
+      "sam_prompted_slices": 51,
+      "sam_seconds": 49.486089832149446,
+      "metrics": {
+        "flair": {
+          "dice": 0.6036537449912001,
+          "recall": 0.4335597141631061,
+          "false_positive_ml": 0.31,
+          "predicted_ml": 46.785000000000004,
+          "truth_ml": 107.194
+        },
+        "unet": {
+          "dice": 0.8867860520580616,
+          "recall": 0.804737205440603,
+          "false_positive_ml": 1.095,
+          "predicted_ml": 87.358,
+          "truth_ml": 107.194
+        },
+        "unet_cleaned": {
+          "dice": 0.8861207401997593,
+          "recall": 0.8036457264399127,
+          "false_positive_ml": 1.094,
+          "predicted_ml": 87.24,
+          "truth_ml": 107.194
+        },
+        "unet_sam": {
+          "dice": 0.8797716310660498,
+          "recall": 0.8337780099632442,
+          "false_positive_ml": 6.61,
+          "predicted_ml": 95.986,
+          "truth_ml": 107.194
+        }
+      }
+    },
+    {
+      "patient": "BRATS_459",
+      "slice_count": 155,
+      "sam_prompted_slices": 24,
+      "sam_seconds": 23.250724710524082,
+      "metrics": {
+        "flair": {
+          "dice": 0.05098597585275346,
+          "recall": 0.9828597899938234,
+          "false_positive_ml": 473.671,
+          "predicted_ml": 486.401,
+          "truth_ml": 12.952
+        },
+        "unet": {
+          "dice": 0.553448496481126,
+          "recall": 0.8348517603458925,
+          "false_positive_ml": 15.31,
+          "predicted_ml": 26.123,
+          "truth_ml": 12.952
+        },
+        "unet_cleaned": {
+          "dice": 0.5587618727192732,
+          "recall": 0.8334620135886349,
+          "false_positive_ml": 14.892,
+          "predicted_ml": 25.687,
+          "truth_ml": 12.952
+        },
+        "unet_sam": {
+          "dice": 0.4895702437798442,
+          "recall": 0.7520074119827054,
+          "false_positive_ml": 17.098,
+          "predicted_ml": 26.838,
+          "truth_ml": 12.952
+        }
+      }
+    },
+    {
+      "patient": "BRATS_466",
+      "slice_count": 155,
+      "sam_prompted_slices": 26,
+      "sam_seconds": 25.0149405002594,
+      "metrics": {
+        "flair": {
+          "dice": 0.048409478512335416,
+          "recall": 0.9550394076904705,
+          "false_positive_ml": 628.078,
+          "predicted_ml": 644.073,
+          "truth_ml": 16.748
+        },
+        "unet": {
+          "dice": 0.6313930271847642,
+          "recall": 0.4909242894673991,
+          "false_positive_ml": 1.074,
+          "predicted_ml": 9.296,
+          "truth_ml": 16.748
+        },
+        "unet_cleaned": {
+          "dice": 0.6337534204339615,
+          "recall": 0.4909242894673991,
+          "false_positive_ml": 0.977,
+          "predicted_ml": 9.199,
+          "truth_ml": 16.748
+        },
+        "unet_sam": {
+          "dice": 0.6953640073952628,
+          "recall": 0.5951158347265345,
+          "false_positive_ml": 1.952,
+          "predicted_ml": 11.919,
+          "truth_ml": 16.748
+        }
+      }
+    },
+    {
+      "patient": "BRATS_478",
+      "slice_count": 155,
+      "sam_prompted_slices": 42,
+      "sam_seconds": 40.63451504195109,
+      "metrics": {
+        "flair": {
+          "dice": 0.5362005685431656,
+          "recall": 0.9055487978467351,
+          "false_positive_ml": 113.761,
+          "predicted_ml": 183.74,
+          "truth_ml": 77.278
+        },
+        "unet": {
+          "dice": 0.8386822416244735,
+          "recall": 0.8166619218923885,
+          "false_positive_ml": 10.11,
+          "predicted_ml": 73.22,
+          "truth_ml": 77.278
+        },
+        "unet_cleaned": {
+          "dice": 0.8416432068951715,
+          "recall": 0.8162995936747846,
+          "false_positive_ml": 9.542,
+          "predicted_ml": 72.624,
+          "truth_ml": 77.278
+        },
+        "unet_sam": {
+          "dice": 0.7540617278973467,
+          "recall": 0.84713631305158,
+          "false_positive_ml": 30.89,
+          "predicted_ml": 96.355,
+          "truth_ml": 77.278
+        }
+      }
+    }
+  ]
+}

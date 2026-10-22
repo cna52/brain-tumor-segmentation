@@ -16,9 +16,9 @@ def main():
     names = [("flair", "FLAIR threshold"), ("unet", "U-Net"),
              ("unet_cleaned", "U-Net + cleanup"), ("unet_sam", "U-Net + SAM")]
     lines = ["# Held-out results", "", "Research only; not for clinical use.", "",
-             f"Code commit: `{result['code_commit']}`. Split SHA-256: `{result['split_sha256']}`. ",
-             f"Configuration SHA-256: `{result['config_sha256']}`. Selection SHA-256: `{result['selection_sha256']}`. ",
-             f"Dependency lockfile SHA-256: `{result['lockfile_sha256']}`. ",
+             f"Code commit: `{result['code_commit']}`. Split SHA-256: `{result['split_sha256']}`.",
+             f"Configuration SHA-256: `{result['config_sha256']}`. Selection SHA-256: `{result['selection_sha256']}`.",
+             f"Dependency lockfile SHA-256: `{result['lockfile_sha256']}`.",
              f"U-Net checkpoint SHA-256: `{result['checkpoint_sha256']}`. SAM checkpoint SHA-256: `{result['sam_checkpoint_sha256']}`.",
              f"The dependency lockfile is `requirements.lock.txt`. Device: {result['device']} on {result['hardware']}.", "",
              "## Aggregate", "", "Mean across all 72 held-out patient volumes. False positives use each source affine's voxel volume.", "",
@@ -46,10 +46,15 @@ def main():
     lines.extend(["", "## Representative failures", "", "Largest paired SAM declines relative to the cleaned U-Net:", ""])
     for row in failures:
         m = row["metrics"]
+        cleaned = m["unet_cleaned"]
+        sam = m["unet_sam"]
+        recall_change = sam["recall"] - cleaned["recall"]
+        fp_change = sam["false_positive_ml"] - cleaned["false_positive_ml"]
         lines.append(f"- `{row['patient']}`: cleaned Dice {m['unet_cleaned']['dice']:.4f}, "
                      f"SAM Dice {m['unet_sam']['dice']:.4f}; SAM recall {m['unet_sam']['recall']:.4f}; "
                      f"SAM FP {m['unet_sam']['false_positive_ml']:.2f} mL. "
-                     "This quantifies the failure; visual interpretation requires reviewing the locally exported masks.")
+                     f"Relative to cleanup, recall changed {recall_change:+.4f} and false-positive volume changed "
+                     f"{fp_change:+.2f} mL.")
     direction = "improved" if paired["sam_minus_cleaned_dice"] > 0 else "reduced" if paired["sam_minus_cleaned_dice"] < 0 else "matched"
     lines.extend(["", "## Conclusion", "",
                   f"On this fixed held-out split, frozen SAM {direction} mean patient Dice relative to the U-Net with identical candidate cleanup "
@@ -57,14 +62,17 @@ def main():
     lines.extend(["", "## Compute and limitations", "",
                   f"The SAM benchmark used {bench['n']} validation slices; mean {bench['seconds_per_slice_mean']:.3f} s/slice, "
                   f"median {bench['seconds_per_slice_median']:.3f} s/slice, maximum observed device allocation {bench['max_observed_device_allocated_bytes']} bytes. "
-                  f"The first call took {bench['first_call_seconds']:.3f} s. A steady all-slice projection was {bench['projected_steady_all_slices_hours']:.2f} hours; actual SAM times per patient are in `artifacts/results.json`.",
+                  f"The first call took {bench['first_call_seconds']:.3f} s. A steady all-slice projection was {bench['projected_steady_all_slices_hours']:.2f} hours. "
+                  f"The held-out run invoked SAM on {sum(x['sam_prompted_slices'] for x in result['patients'])} of "
+                  f"{sum(x['slice_count'] for x in result['patients'])} slices and spent "
+                  f"{sum(x['sam_seconds'] for x in result['patients'])/3600:.2f} hours in SAM refinement; per-patient times are in `metrics/results.json`.",
                   "Only FLAIR is used. This is a 2D model evaluated on a fixed patient split of one public dataset; "+
                   "the original unlabelled MSD test set has no labels for this evaluation. Box prompts are generated from U-Net predictions, " +
                   "so missed tumours cannot be recovered when a slice has no U-Net candidate. SAM was trained on natural images and was used frozen. " +
                   "Validation choices are limited to the documented grids. These findings do not establish clinical performance or external generalization.", "",
                   "## Reproduction", "", "Run the commands in `README.md` in order. `configs/selection.json` locks validation choices. " +
                   "The held-out command was `python -m brain_tumor.evaluate test --data ../brain-tumor-data/Task01_BrainTumour --export-dir artifacts/predictions`. " +
-                  "The machine-readable metrics and individual NIfTI predictions remain outside Git under `artifacts/`.", ""])
+                  "Machine-readable aggregate and patient metrics are committed in `metrics/results.json`; individual NIfTI predictions remain outside Git under `artifacts/`.", ""])
     args.output.write_text("\n".join(lines))
     print(f"Wrote {args.output}")
 

@@ -2,7 +2,7 @@
 
 Research-only experiment on [Medical Segmentation Decathlon](https://medicaldecathlon.com/) Task01 BrainTumour. A single-channel 2D U-Net predicts whole tumour (all nonzero label classes) from FLAIR MRI. Its connected components generate bounded box prompts for frozen [Segment Anything](https://github.com/facebookresearch/segment-anything) ViT-B. The locked held-out comparison includes a simple FLAIR threshold, raw U-Net, U-Net with the same candidate cleanup, and U-Net plus SAM. SAM is retained in the report even if it makes the result worse. This is **not for clinical use**.
 
-The idea builds on a course team's conceptual exploration of brain-tumour segmentation. This repository uses a new implementation and public MSD data; it contains none of that team's code, data, checkpoints, images, or unverified metrics. Team member names can be added with their consent.
+The earlier course team contributed the initial concept of applying SAM to brain-tumour segmentation. This repository uses a new implementation and public MSD data; it contains none of that team's code, data, checkpoints, images, or unverified metrics. Team member names can be added with their consent.
 
 ## Data and licence
 
@@ -16,8 +16,9 @@ The commands below run from the repository root on Python 3.11. Keep data and mo
 
 ```bash
 python3.11 -m venv .venv
-.venv/bin/python -m pip install '.[test]'
-.venv/bin/python -m pip list --format=freeze | grep -v '^brain-tumor-segmentation==' > requirements.lock.txt
+.venv/bin/python -m pip install -r requirements.lock.txt
+.venv/bin/python -m pip install --no-deps .
+df -h .
 mkdir -p ../brain-tumor-data
 curl -L --fail --continue-at - -o ../brain-tumor-data/Task01_BrainTumour.tar https://msd-for-monai.s3-us-west-2.amazonaws.com/Task01_BrainTumour.tar
 .venv/bin/python scripts/prepare_data.py --archive ../brain-tumor-data/Task01_BrainTumour.tar --out ../brain-tumor-data --delete-archive
@@ -35,3 +36,5 @@ curl -L --fail -o artifacts/sam_vit_b_01ec64.pth https://dl.fbaipublicfiles.com/
 The split is fixed in `splits/patients.json`. Training includes every axial training slice, including empty slices. Validation patients select the checkpoint, thresholds, connected-component size, and box padding. Test labels are loaded only by the final `test` command for metrics. Inference functions use no labels. The output masks restore source shape and affine. `artifacts/` and NIfTI files are ignored by Git.
 
 See [plan](docs/plan.md) and [results](docs/results.md) for recorded execution status and findings.
+
+The complete 72-patient held-out comparison found mean whole-volume Dice of 0.7931 for the U-Net and 0.7566 for U-Net plus frozen SAM. SAM increased mean tumour recall from 0.7768 to 0.8113 and mean false-positive volume from 12.85 to 31.85 mL. See `docs/results.md` for every patient and `metrics/results.json` for machine-readable values.
