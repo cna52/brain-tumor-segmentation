@@ -2,9 +2,9 @@
 
 - [x] Clone and inspect empty repository. Verified `git ls-remote`, `git clone`, and `git status --short --branch`; the clone had no commits. Next: obtain and verify Task01.
 - [x] Verify Task01 MD5, extract, assert metadata, commit the patient split. Verification: `.venv/bin/python scripts/prepare_data.py --archive ../brain-tumor-data/Task01_BrainTumour.tar --out ../brain-tumor-data --delete-archive` printed MD5 `240a19d752f0d9e9101544901065d872`, 484 labelled cases, FLAIR channel 0, expected labels, and split counts 339/73/72. The verified archive was removed. Next: tests and MPS smoke run.
-- [ ] Run tests and MPS smoke benchmark. Verification: `pytest -q` and `python -m brain_tumor.train ... --smoke`; record elapsed time. Next: full baseline training.
+- [x] Run tests and MPS smoke benchmark. Verification: `.venv/bin/python -m pytest -q` passed 6 tests; `.venv/bin/python -m brain_tumor.train --data ../brain-tumor-data/Task01_BrainTumour --smoke --output artifacts/smoke.pt` ran two train and two validation batches on MPS in 1.00 s. Next: full baseline training.
 - [ ] Train baseline with validation early stopping. Verification: training log and checkpoint metadata; record checkpoint SHA. Next: benchmark SAM.
-- [ ] Benchmark official frozen SAM ViT-B. Verification: `scripts/benchmark_sam.py`; record projected runtime and device memory. Next: validation selection.
+- [x] Benchmark official frozen SAM ViT-B. Verification: `.venv/bin/python scripts/benchmark_sam.py --data ../brain-tumor-data/Task01_BrainTumour` ran eight validation slices on MPS. Median 0.828 s/slice; mean 1.831 s/slice including 8.581 s first-call warm-up; maximum observed device allocation 3,980,247,040 bytes; naive 72×155-slice projection 5.68 h. Empty U-Net candidate slices will skip SAM. Next: baseline training, then validation selection.
 - [ ] Lock validation choices. Verification: `python -m brain_tumor.evaluate tune ...` and `configs/selection.json`; record its SHA. Next: untouched test evaluation.
 - [ ] Evaluate all 72 test patients and write `docs/results.md`. Verification: `python -m brain_tumor.evaluate test ...`; verify per-patient count, mask shape and affine. Next: review.
 
