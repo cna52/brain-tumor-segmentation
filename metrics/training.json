@@ -1,0 +1,132 @@
+{
+  "checkpoint_metadata": {
+    "epoch": 11,
+    "val_loss": 0.19340540291121042,
+    "seed": 20261021,
+    "device": "mps",
+    "config_sha256": "536ed17bff7d48744fcab1e93e673c3251abad9715b91ae6a146045870bc2f76",
+    "split_sha256": "f47ad61669a733ca531e89ade8499483cc739bedcdf9355e302caf170826697b",
+    "commit": "8645960e6dbfb8df2398ab6f652b6085a4ea565d",
+    "torch": "2.7.1",
+    "smoke": false,
+    "original_recorded_commit": "a2f349ab83a25c43bdebe5c91fa1df763795f7f6",
+    "lockfile_sha256": "9f1f69cb2b35c52baa45d4b733347af6a8f809bf48981c58b7c03042b52fcf4c",
+    "provenance_note": "Training began at commit 8645960; the running version read HEAD at checkpoint save. Corrected after run; model weights unchanged."
+  },
+  "checkpoint_sha256": "ff291f6f769a9535d504feeb660c1c64b392ab9b905f379a5284c8991de6fdf5",
+  "lockfile_sha256": "9f1f69cb2b35c52baa45d4b733347af6a8f809bf48981c58b7c03042b52fcf4c",
+  "split_sha256": "f47ad61669a733ca531e89ade8499483cc739bedcdf9355e302caf170826697b",
+  "config_sha256": "536ed17bff7d48744fcab1e93e673c3251abad9715b91ae6a146045870bc2f76",
+  "hardware": "MacBook Air Mac16,12, Apple M4, 16 GB RAM",
+  "epochs": [
+    {
+      "epoch": 1,
+      "train_loss": 0.5326410943252147,
+      "val_loss": 0.3159041562925367,
+      "seconds": 343.12257262459025,
+      "device": "mps",
+      "train_batches": 3390,
+      "val_batches": 730
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.3036867074899178,
+      "val_loss": 0.2836240682018909,
+      "seconds": 372.15061991708353,
+      "device": "mps",
+      "train_batches": 3390,
+      "val_batches": 730
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.26645026287389506,
+      "val_loss": 0.26059603625511807,
+      "seconds": 359.72382833296433,
+      "device": "mps",
+      "train_batches": 3390,
+      "val_batches": 730
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.2319467085308552,
+      "val_loss": 0.27950999960443657,
+      "seconds": 368.15870012529194,
+      "device": "mps",
+      "train_batches": 3390,
+      "val_batches": 730
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.2183750056200125,
+      "val_loss": 0.2343619415681145,
+      "seconds": 334.6341537917033,
+      "device": "mps",
+      "train_batches": 3390,
+      "val_batches": 730
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.21033107549082747,
+      "val_loss": 0.21342796206253334,
+      "seconds": 321.95270675001666,
+      "device": "mps",
+      "train_batches": 3390,
+      "val_batches": 730
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.20225760464377815,
+      "val_loss": 0.20361096098824094,
+      "seconds": 323.5773578751832,
+      "device": "mps",
+      "train_batches": 3390,
+      "val_batches": 730
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.19636543756383606,
+      "val_loss": 0.1986760125240137,
+      "seconds": 330.1622627079487,
+      "device": "mps",
+      "train_batches": 3390,
+      "val_batches": 730
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.19071951372451754,
+      "val_loss": 0.20286587997739244,
+      "seconds": 354.95807166723534,
+      "device": "mps",
+      "train_batches": 3390,
+      "val_batches": 730
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.1917956502393136,
+      "val_loss": 0.19802309116648384,
+      "seconds": 355.82008625008166,
+      "device": "mps",
+      "train_batches": 3390,
+      "val_batches": 730
+    },
+    {
+      "epoch": 11,
+      "train_loss": 0.1916511246049957,
+      "val_loss": 0.19340540291121042,
+      "seconds": 464.64799600001425,
+      "device": "mps",
+      "train_batches": 3390,
+      "val_batches": 730
+    },
+    {
+      "epoch": 12,
+      "train_loss": 0.18603201260939226,
+      "val_loss": 0.19448610151704673,
+      "seconds": 496.65661191707477,
+      "device": "mps",
+      "train_batches": 3390,
+      "val_batches": 730
+    }
+  ],
+  "training_seconds": 4425.564967959188
+}
