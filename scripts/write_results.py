@@ -31,11 +31,12 @@ def main():
                   f"SAM minus cleaned U-Net: {paired['sam_minus_cleaned_dice']:+.4f}.", "",
                   "## Every test patient", "",
                   "All values are whole-volume. FP is false-positive volume in mL.", "",
-                  "| Patient | U-Net Dice | Cleaned Dice | SAM Dice | SAM recall | SAM FP mL |", "|---|---:|---:|---:|---:|---:|"])
+                  "| Patient | Method | Dice | Recall | FP mL |", "|---|---|---:|---:|---:|"])
     for row in result["patients"]:
-        m = row["metrics"]
-        lines.append(f"| {row['patient']} | {m['unet']['dice']:.4f} | {m['unet_cleaned']['dice']:.4f} | "
-                     f"{m['unet_sam']['dice']:.4f} | {m['unet_sam']['recall']:.4f} | {m['unet_sam']['false_positive_ml']:.2f} |")
+        for key, name in names:
+            m = row["metrics"][key]
+            lines.append(f"| {row['patient']} | {name} | {m['dice']:.4f} | {m['recall']:.4f} | "
+                         f"{m['false_positive_ml']:.2f} |")
     failures = sorted(result["patients"], key=lambda row: row["metrics"]["unet_sam"]["dice"]-row["metrics"]["unet_cleaned"]["dice"])[:3]
     lines.extend(["", "## Representative failures", "", "Largest paired SAM declines relative to the cleaned U-Net:", ""])
     for row in failures:
@@ -44,6 +45,10 @@ def main():
                      f"SAM Dice {m['unet_sam']['dice']:.4f}; SAM recall {m['unet_sam']['recall']:.4f}; "
                      f"SAM FP {m['unet_sam']['false_positive_ml']:.2f} mL. "
                      "This quantifies the failure; visual interpretation requires reviewing the locally exported masks.")
+    direction = "improved" if paired["sam_minus_cleaned_dice"] > 0 else "reduced" if paired["sam_minus_cleaned_dice"] < 0 else "matched"
+    lines.extend(["", "## Conclusion", "",
+                  f"On this fixed held-out split, frozen SAM {direction} mean patient Dice relative to the U-Net with identical candidate cleanup "
+                  f"by {abs(paired['sam_minus_cleaned_dice']):.4f}. The result applies to this FLAIR-only pipeline and dataset split."])
     lines.extend(["", "## Compute and limitations", "",
                   f"The SAM benchmark used {bench['n']} validation slices; mean {bench['seconds_per_slice_mean']:.3f} s/slice, "
                   f"median {bench['seconds_per_slice_median']:.3f} s/slice, maximum observed device allocation {bench['max_observed_device_allocated_bytes']} bytes. "
