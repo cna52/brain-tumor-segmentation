@@ -28,7 +28,12 @@ def main():
         lines.append(f"| {name} | {m['dice']:.4f} | {m['recall']:.4f} | {m['false_positive_ml']:.2f} |")
     paired = result["paired"]
     lines.extend(["", f"Mean paired Dice difference, SAM minus raw U-Net: {paired['sam_minus_unet_dice']:+.4f}; "
-                  f"SAM minus cleaned U-Net: {paired['sam_minus_cleaned_dice']:+.4f}.", "",
+                  f"SAM minus cleaned U-Net: {paired['sam_minus_cleaned_dice']:+.4f}. "
+                  f"Median paired difference: {paired['sam_minus_cleaned_dice_median']:+.4f}. "
+                  f"SAM improved {paired['sam_improved_patient_count']} patients and worsened {paired['sam_worsened_patient_count']}. "
+                  f"Patient bootstrap 95% interval for the mean difference: "
+                  f"[{paired['sam_minus_cleaned_dice_bootstrap_95_ci'][0]:+.4f}, "
+                  f"{paired['sam_minus_cleaned_dice_bootstrap_95_ci'][1]:+.4f}] (10,000 resamples, seed 20261021).", "",
                   "## Every test patient", "",
                   "All values are whole-volume. FP is false-positive volume in mL.", "",
                   "| Patient | Method | Dice | Recall | FP mL |", "|---|---|---:|---:|---:|"])

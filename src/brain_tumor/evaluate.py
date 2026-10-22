@@ -153,8 +153,16 @@ def main():
     aggregate = {name: {metric: float(np.mean([r["metrics"][name][metric] for r in results]))
                         for metric in ("dice", "recall", "false_positive_ml")}
                  for name in names}
-    paired = {"sam_minus_unet_dice": float(np.mean([r["metrics"]["unet_sam"]["dice"]-r["metrics"]["unet"]["dice"] for r in results])),
-              "sam_minus_cleaned_dice": float(np.mean([r["metrics"]["unet_sam"]["dice"]-r["metrics"]["unet_cleaned"]["dice"] for r in results]))}
+    raw_deltas = np.array([r["metrics"]["unet_sam"]["dice"]-r["metrics"]["unet"]["dice"] for r in results])
+    cleaned_deltas = np.array([r["metrics"]["unet_sam"]["dice"]-r["metrics"]["unet_cleaned"]["dice"] for r in results])
+    rng = np.random.default_rng(cfg["seed"])
+    bootstrap = rng.choice(cleaned_deltas, size=(10000, len(cleaned_deltas)), replace=True).mean(axis=1)
+    paired = {"sam_minus_unet_dice": float(raw_deltas.mean()),
+              "sam_minus_cleaned_dice": float(cleaned_deltas.mean()),
+              "sam_minus_cleaned_dice_median": float(np.median(cleaned_deltas)),
+              "sam_improved_patient_count": int(np.count_nonzero(cleaned_deltas > 0)),
+              "sam_worsened_patient_count": int(np.count_nonzero(cleaned_deltas < 0)),
+              "sam_minus_cleaned_dice_bootstrap_95_ci": [float(x) for x in np.quantile(bootstrap, [.025, .975])]}
     output = {"split_sha256": hashlib.sha256(args.split.read_bytes()).hexdigest(),
               "config_sha256": hashlib.sha256(args.config.read_bytes()).hexdigest(),
               "lockfile_sha256": hashlib.sha256(Path("requirements.lock.txt").read_bytes()).hexdigest(),
