@@ -1,7 +1,7 @@
 import numpy as np
 
 from brain_tumor.data import check_split, make_split, normalize, restore_mask, save_mask
-from brain_tumor.inference import sam_refine, unet_probability
+from brain_tumor.inference import sam_padding_grid, sam_refine, unet_probability
 from brain_tumor.metrics import boxes_from_mask, cleanup, patient_metrics
 from brain_tumor.model import UNet
 
@@ -65,3 +65,26 @@ def test_sam_empty_candidates_skip_model_calls():
     pred, times = sam_refine(np.zeros((2, 16, 16)), np.zeros((16, 16, 2)),
                              FailPredictor(), .5, 0, 4)
     assert not pred.any() and times == []
+
+
+def test_padding_grid_reuses_one_image_encoding():
+    class Predictor:
+        def __init__(self):
+            self.images = 0
+            self.shape = None
+        def set_image(self, image):
+            self.images += 1
+            self.shape = image.shape[:2]
+        def predict(self, box, multimask_output):
+            mask = np.zeros(self.shape, bool)
+            x1, y1, x2, y2 = box
+            mask[y1:y2+1, x1:x2+1] = True
+            return np.stack([mask, np.zeros_like(mask)]), np.array([.9, .1]), None
+    prob = np.zeros((2, 16, 16))
+    prob[0, 4:8, 5:9] = 1
+    predictor = Predictor()
+    outputs = sam_padding_grid(prob, np.ones((16, 16, 2)), predictor, .5, 0, [0, 2])
+    assert predictor.images == 1
+    assert outputs[0][0].sum() == 16
+    assert outputs[2][0].sum() > outputs[0][0].sum()
+    assert not outputs[0][1].any()

@@ -46,5 +46,23 @@ def sam_refine(prob, image, predictor, threshold, min_pixels, padding, max_compo
     return result, times
 
 
+def sam_padding_grid(prob, image, predictor, threshold, min_pixels, paddings, max_components=5):
+    """Score padding variants with one SAM image encoding per candidate slice."""
+    size = prob.shape[-1]
+    outputs = {padding: np.zeros_like(prob, dtype=bool) for padding in paddings}
+    for z in range(len(prob)):
+        candidates = cleanup(prob[z] >= threshold, min_pixels, max_components)
+        if not candidates.any():
+            continue
+        gray = resize_slice(image[:, :, z], size).numpy()
+        rgb = np.repeat((np.clip(gray, 0, 1)*255).astype(np.uint8)[:, :, None], 3, axis=2)
+        predictor.set_image(rgb)
+        for padding in paddings:
+            for box in boxes_from_mask(candidates, padding, max_components):
+                masks, scores, _ = predictor.predict(box=np.array(box), multimask_output=True)
+                outputs[padding][z] |= masks[int(np.argmax(scores))]
+    return outputs
+
+
 def restore_prediction(pred, source_shape):
     return restore_mask(pred, source_shape)

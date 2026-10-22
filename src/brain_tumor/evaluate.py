@@ -12,7 +12,7 @@ import numpy as np
 import torch
 
 from .data import check_split, load_volume, read_cases, resize_slice, restore_mask, save_mask
-from .inference import sam_refine, threshold_probability, unet_probability
+from .inference import sam_padding_grid, sam_refine, threshold_probability, unet_probability
 from .metrics import patient_metrics
 from .model import UNet
 
@@ -97,15 +97,15 @@ def main():
         _, flair_threshold = max(flair_candidates)
         predictor = sam_predictor(args.sam_checkpoint, device)
         # Tune box padding on twelve seeded validation patients; full volumes, never test patients.
-        padding_scores = []
-        for padding in cfg["box_padding_pixels"]:
-            rows = []
-            for case_id, prob, norm, truth, affine in subset:
-                pred, _ = sam_refine(prob, norm, predictor, threshold, min_pixels, padding,
-                                     cfg["max_boxes_per_slice"])
-                rows.append(score(pred, truth, affine))
-            padding_scores.append((mean_dice(rows), padding))
-            print(f"Validation SAM padding={padding}: Dice={padding_scores[-1][0]:.4f}", flush=True)
+        padding_rows = {padding: [] for padding in cfg["box_padding_pixels"]}
+        for i, (case_id, prob, norm, truth, affine) in enumerate(subset, 1):
+            masks = sam_padding_grid(prob, norm, predictor, threshold, min_pixels,
+                                     cfg["box_padding_pixels"], cfg["max_boxes_per_slice"])
+            for padding, pred in masks.items():
+                padding_rows[padding].append(score(pred, truth, affine))
+            print(f"Scored SAM validation {i}/{len(subset)} {case_id}", flush=True)
+        padding_scores = [(mean_dice(rows), padding) for padding, rows in padding_rows.items()]
+        print(f"Validation SAM padding grid: {padding_scores}", flush=True)
         _, padding = max(padding_scores)
         selection = {"unet_threshold": threshold, "unet_raw_threshold": raw_threshold,
                      "minimum_component_pixels": min_pixels,
