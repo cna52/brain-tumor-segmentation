@@ -3,6 +3,7 @@ import argparse
 import hashlib
 import json
 import platform
+import random
 import subprocess
 import time
 from pathlib import Path
@@ -71,6 +72,7 @@ def main():
         flair_values = [float(x) for x in np.arange(.2, .81, .1)]
         flair_rows = {threshold: [] for threshold in flair_values}
         subset = []
+        chosen_sam_ids = set(random.Random(cfg["seed"]).sample(ids, 12))
         for i, case_id in enumerate(ids, 1):
             image, truth, affine, _ = load_volume(cases[case_id])
             prob, norm = unet_probability(model, image, cfg["image_size"], device, cfg["batch_size"])
@@ -83,7 +85,7 @@ def main():
                                      for z in range(norm.shape[2])])
             for threshold_flair in flair_values:
                 flair_rows[threshold_flair].append(score(flair_slices >= threshold_flair, truth, affine))
-            if i <= 12:
+            if case_id in chosen_sam_ids:
                 subset.append((case_id, prob, norm, truth, affine))
             print(f"Scored validation {i}/{len(ids)} {case_id}", flush=True)
         candidates = [(mean_dice(rows), threshold, min_pixels)
@@ -94,7 +96,7 @@ def main():
         flair_candidates = [(mean_dice(rows), threshold) for threshold, rows in flair_rows.items()]
         _, flair_threshold = max(flair_candidates)
         predictor = sam_predictor(args.sam_checkpoint, device)
-        # Tune box padding on twelve fixed validation patients; full volumes, never test patients.
+        # Tune box padding on twelve seeded validation patients; full volumes, never test patients.
         padding_scores = []
         for padding in cfg["box_padding_pixels"]:
             rows = []
