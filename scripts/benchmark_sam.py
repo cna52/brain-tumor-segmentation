@@ -8,7 +8,7 @@ from pathlib import Path
 import numpy as np
 import torch
 
-from brain_tumor.data import load_volume, read_cases, resize_slice
+from brain_tumor.data import load_volume, normalize, read_cases, resize_slice
 from brain_tumor.evaluate import sam_predictor
 
 
@@ -25,11 +25,13 @@ def main():
     device = "mps" if torch.backends.mps.is_available() else "cuda" if torch.cuda.is_available() else "cpu"
     predictor = sam_predictor(args.checkpoint, device)
     times = []
+    allocations = []
     for case_id in split["val"][:2]:
         image, _, _, _ = load_volume(cases[case_id], with_label=False)
+        image = normalize(image)
         for z in np.linspace(image.shape[2]//4, image.shape[2]*3//4, args.n//2, dtype=int):
             gray = resize_slice(image[:, :, z], 128).numpy()
-            gray = (255*(gray-gray.min()) / max(1e-6, gray.max()-gray.min())).astype(np.uint8)
+            gray = (255*np.clip(gray, 0, 1)).astype(np.uint8)
             rgb = np.repeat(gray[:, :, None], 3, axis=2)
             start = time.perf_counter()
             predictor.set_image(rgb)
@@ -39,11 +41,13 @@ def main():
             elif device == "cuda":
                 torch.cuda.synchronize()
             times.append(time.perf_counter()-start)
-    peak = torch.mps.driver_allocated_memory() if device == "mps" else torch.cuda.max_memory_allocated() if device == "cuda" else None
+            allocations.append(torch.mps.driver_allocated_memory() if device == "mps" else
+                               torch.cuda.max_memory_allocated() if device == "cuda" else None)
+    peak = max((x for x in allocations if x is not None), default=None)
     result = {"hardware": platform.platform(), "device": device, "n": len(times),
               "seconds_per_slice_median": float(np.median(times)),
               "seconds_per_slice_mean": float(np.mean(times)),
-              "peak_device_bytes": peak,
+              "max_observed_device_allocated_bytes": peak,
               "projected_72_patients_155_slices_hours": float(np.mean(times)*72*155/3600),
               "times": times}
     args.output.parent.mkdir(parents=True, exist_ok=True)
