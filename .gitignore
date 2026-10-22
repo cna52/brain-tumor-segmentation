@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+.pytest_cache/
+data/
+artifacts/
+*.nii
+*.nii.gz
+*.tar
+*.pth
+*.pt
+*.ckpt
+*.safetensors
+*.log
+.DS_Store

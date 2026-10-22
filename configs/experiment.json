@@ -1,0 +1,17 @@
+{
+  "seed": 20261021,
+  "image_size": 128,
+  "batch_size": 16,
+  "epochs": 12,
+  "patience": 3,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "base_channels": 16,
+  "num_workers": 0,
+  "threshold_candidates": [0.25, 0.35, 0.45, 0.5, 0.55, 0.65],
+  "minimum_component_pixels": [0, 16, 64],
+  "box_padding_pixels": [0, 4, 12],
+  "max_boxes_per_slice": 5,
+  "sam_mask_rule": "highest_predicted_iou",
+  "sam_checkpoint": "sam_vit_b_01ec64.pth"
+}

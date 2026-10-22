@@ -1,0 +1,14 @@
+Metadata-Version: 2.4
+Name: brain-tumor-segmentation
+Version: 0.1.0
+Summary: Research-only FLAIR whole-tumour segmentation comparison
+Requires-Python: <3.14,>=3.11
+Requires-Dist: numpy==1.26.4
+Requires-Dist: scipy==1.15.3
+Requires-Dist: nibabel==5.3.2
+Requires-Dist: torch==2.7.1
+Requires-Dist: torchvision==0.22.1
+Requires-Dist: tqdm==4.67.1
+Requires-Dist: segment-anything==1.0
+Provides-Extra: test
+Requires-Dist: pytest==8.4.1; extra == "test"

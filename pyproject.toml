@@ -1,0 +1,24 @@
+[project]
+name = "brain-tumor-segmentation"
+version = "0.1.0"
+description = "Research-only FLAIR whole-tumour segmentation comparison"
+requires-python = ">=3.11,<3.14"
+dependencies = [
+  "numpy==1.26.4",
+  "scipy==1.15.3",
+  "nibabel==5.3.2",
+  "torch==2.7.1",
+  "torchvision==0.22.1",
+  "tqdm==4.67.1",
+  "segment-anything==1.0",
+]
+
+[project.optional-dependencies]
+test = ["pytest==8.4.1"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
