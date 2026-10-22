@@ -155,6 +155,7 @@ def main():
               "sam_minus_cleaned_dice": float(np.mean([r["metrics"]["unet_sam"]["dice"]-r["metrics"]["unet_cleaned"]["dice"] for r in results]))}
     output = {"split_sha256": hashlib.sha256(args.split.read_bytes()).hexdigest(),
               "config_sha256": hashlib.sha256(args.config.read_bytes()).hexdigest(),
+              "lockfile_sha256": hashlib.sha256(Path("requirements.lock.txt").read_bytes()).hexdigest(),
               "selection_sha256": hashlib.sha256(args.selection.read_bytes()).hexdigest(),
               "checkpoint_sha256": hashlib.sha256(args.checkpoint.read_bytes()).hexdigest(),
               "sam_checkpoint_sha256": hashlib.sha256(args.sam_checkpoint.read_bytes()).hexdigest(),

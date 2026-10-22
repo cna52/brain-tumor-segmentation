@@ -18,6 +18,7 @@ def main():
     lines = ["# Held-out results", "", "Research only; not for clinical use.", "",
              f"Code commit: `{result['code_commit']}`. Split SHA-256: `{result['split_sha256']}`. ",
              f"Configuration SHA-256: `{result['config_sha256']}`. Selection SHA-256: `{result['selection_sha256']}`. ",
+             f"Dependency lockfile SHA-256: `{result['lockfile_sha256']}`. ",
              f"U-Net checkpoint SHA-256: `{result['checkpoint_sha256']}`. SAM checkpoint SHA-256: `{result['sam_checkpoint_sha256']}`.",
              f"The dependency lockfile is `requirements.lock.txt`. Device: {result['device']} on {result['hardware']}.", "",
              "## Aggregate", "", "Mean across all 72 held-out patient volumes. False positives use each source affine's voxel volume.", "",
