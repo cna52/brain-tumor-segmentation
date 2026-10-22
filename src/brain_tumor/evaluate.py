@@ -65,34 +65,36 @@ def main():
     ids = split["val"] if args.mode == "tune" else split["test"]
 
     if args.mode == "tune":
-        records = []
+        candidate_rows = {(threshold, min_pixels): [] for threshold in cfg["threshold_candidates"]
+                          for min_pixels in cfg["minimum_component_pixels"]}
+        raw_rows = {threshold: [] for threshold in cfg["threshold_candidates"]}
+        flair_values = [float(x) for x in np.arange(.2, .81, .1)]
+        flair_rows = {threshold: [] for threshold in flair_values}
+        subset = []
         for i, case_id in enumerate(ids, 1):
             image, truth, affine, _ = load_volume(cases[case_id])
             prob, norm = unet_probability(model, image, cfg["image_size"], device, cfg["batch_size"])
-            records.append((case_id, prob, norm, truth, affine))
-            print(f"Loaded validation {i}/{len(ids)} {case_id}", flush=True)
-        candidates = []
-        raw_candidates = []
-        for threshold in cfg["threshold_candidates"]:
-            raw_rows = [score(np.stack([sl >= threshold for sl in prob]), truth, affine)
-                        for _, prob, _, truth, affine in records]
-            raw_candidates.append((mean_dice(raw_rows), threshold))
-            for min_pixels in cfg["minimum_component_pixels"]:
-                rows = [score(threshold_probability(prob, threshold, min_pixels), truth, affine)
-                        for _, prob, _, truth, affine in records]
-                candidates.append((mean_dice(rows), threshold, min_pixels))
+            for threshold in cfg["threshold_candidates"]:
+                raw_rows[threshold].append(score(prob >= threshold, truth, affine))
+                for min_pixels in cfg["minimum_component_pixels"]:
+                    candidate_rows[threshold, min_pixels].append(
+                        score(threshold_probability(prob, threshold, min_pixels), truth, affine))
+            flair_slices = np.stack([resize_slice(norm[:, :, z], cfg["image_size"]).numpy()
+                                     for z in range(norm.shape[2])])
+            for threshold_flair in flair_values:
+                flair_rows[threshold_flair].append(score(flair_slices >= threshold_flair, truth, affine))
+            if i <= 12:
+                subset.append((case_id, prob, norm, truth, affine))
+            print(f"Scored validation {i}/{len(ids)} {case_id}", flush=True)
+        candidates = [(mean_dice(rows), threshold, min_pixels)
+                      for (threshold, min_pixels), rows in candidate_rows.items()]
+        raw_candidates = [(mean_dice(rows), threshold) for threshold, rows in raw_rows.items()]
         _, threshold, min_pixels = max(candidates)
         _, raw_threshold = max(raw_candidates)
-        flair_candidates = []
-        for threshold_flair in np.arange(.2, .81, .1):
-            rows = [score(np.stack([resize_slice(norm[:, :, z], cfg["image_size"]).numpy() >= threshold_flair
-                                    for z in range(norm.shape[2])]), truth, affine)
-                    for _, _, norm, truth, affine in records]
-            flair_candidates.append((mean_dice(rows), float(threshold_flair)))
+        flair_candidates = [(mean_dice(rows), threshold) for threshold, rows in flair_rows.items()]
         _, flair_threshold = max(flair_candidates)
         predictor = sam_predictor(args.sam_checkpoint, device)
         # Tune box padding on twelve fixed validation patients; full volumes, never test patients.
-        subset = records[:12]
         padding_scores = []
         for padding in cfg["box_padding_pixels"]:
             rows = []

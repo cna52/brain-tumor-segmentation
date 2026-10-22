@@ -28,6 +28,8 @@ def main():
     check_split(split, cases)
     seed = cfg["seed"]
     random.seed(seed); np.random.seed(seed); torch.manual_seed(seed)
+    code_commit = subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()
+    lock_sha256 = hashlib.sha256(Path("requirements.lock.txt").read_bytes()).hexdigest()
     device = "mps" if torch.backends.mps.is_available() else "cuda" if torch.cuda.is_available() else "cpu"
     train = SliceDataset(cases, split["train"], cfg["image_size"], augment=True)
     val = SliceDataset(cases, split["val"], cfg["image_size"])
@@ -64,7 +66,7 @@ def main():
             metadata = {"epoch": epoch+1, "val_loss": val_loss, "seed": seed, "device": device,
                         "config_sha256": hashlib.sha256(args.config.read_bytes()).hexdigest(),
                         "split_sha256": hashlib.sha256(args.split.read_bytes()).hexdigest(),
-                        "commit": subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip(),
+                        "commit": code_commit, "lockfile_sha256": lock_sha256,
                         "torch": torch.__version__, "smoke": args.smoke}
             torch.save({"model": model.state_dict(), "metadata": metadata}, args.output)
         else:
