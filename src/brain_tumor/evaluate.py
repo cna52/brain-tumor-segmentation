@@ -72,12 +72,17 @@ def main():
             records.append((case_id, prob, norm, truth, affine))
             print(f"Loaded validation {i}/{len(ids)} {case_id}", flush=True)
         candidates = []
+        raw_candidates = []
         for threshold in cfg["threshold_candidates"]:
+            raw_rows = [score(np.stack([sl >= threshold for sl in prob]), truth, affine)
+                        for _, prob, _, truth, affine in records]
+            raw_candidates.append((mean_dice(raw_rows), threshold))
             for min_pixels in cfg["minimum_component_pixels"]:
                 rows = [score(threshold_probability(prob, threshold, min_pixels), truth, affine)
                         for _, prob, _, truth, affine in records]
                 candidates.append((mean_dice(rows), threshold, min_pixels))
         _, threshold, min_pixels = max(candidates)
+        _, raw_threshold = max(raw_candidates)
         flair_candidates = []
         for threshold_flair in np.arange(.2, .81, .1):
             rows = [score(np.stack([resize_slice(norm[:, :, z], cfg["image_size"]).numpy() >= threshold_flair
@@ -98,10 +103,12 @@ def main():
             padding_scores.append((mean_dice(rows), padding))
             print(f"Validation SAM padding={padding}: Dice={padding_scores[-1][0]:.4f}", flush=True)
         _, padding = max(padding_scores)
-        selection = {"unet_threshold": threshold, "minimum_component_pixels": min_pixels,
+        selection = {"unet_threshold": threshold, "unet_raw_threshold": raw_threshold,
+                     "minimum_component_pixels": min_pixels,
                      "flair_threshold": flair_threshold, "box_padding_pixels": padding,
                      "sam_mask_rule": cfg["sam_mask_rule"], "sam_tuning_patients": [r[0] for r in subset],
-                     "validation_unet_grid": candidates, "validation_flair_grid": flair_candidates,
+                     "validation_unet_grid": candidates, "validation_unet_raw_grid": raw_candidates,
+                     "validation_flair_grid": flair_candidates,
                      "validation_sam_padding_grid": padding_scores,
                      "split_sha256": hashlib.sha256(args.split.read_bytes()).hexdigest(),
                      "config_sha256": hashlib.sha256(args.config.read_bytes()).hexdigest(),
@@ -121,7 +128,7 @@ def main():
     for i, case_id in enumerate(ids, 1):
         image, truth, affine, header = load_volume(cases[case_id])
         prob, norm = unet_probability(model, image, cfg["image_size"], device, cfg["batch_size"])
-        raw = np.stack([sl >= selection["unet_threshold"] for sl in prob])
+        raw = np.stack([sl >= selection["unet_raw_threshold"] for sl in prob])
         cleaned = threshold_probability(prob, selection["unet_threshold"], selection["minimum_component_pixels"])
         flair = np.stack([resize_slice(norm[:, :, z], cfg["image_size"]).numpy() >= selection["flair_threshold"]
                           for z in range(norm.shape[2])])

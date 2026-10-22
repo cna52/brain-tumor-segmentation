@@ -26,6 +26,8 @@ curl -L --fail -o artifacts/sam_vit_b_01ec64.pth https://dl.fbaipublicfiles.com/
 .venv/bin/python scripts/benchmark_sam.py --data ../brain-tumor-data/Task01_BrainTumour
 .venv/bin/python -m brain_tumor.evaluate tune --data ../brain-tumor-data/Task01_BrainTumour
 .venv/bin/python -m brain_tumor.evaluate test --data ../brain-tumor-data/Task01_BrainTumour --export-dir artifacts/predictions
+.venv/bin/python scripts/verify_outputs.py --data ../brain-tumor-data/Task01_BrainTumour
+.venv/bin/python scripts/write_results.py
 ```
 
 The split is fixed in `splits/patients.json`. Training includes every axial training slice, including empty slices. Validation patients select the checkpoint, thresholds, connected-component size, and box padding. Test labels are loaded only by the final `test` command for metrics. Inference functions use no labels. The output masks restore source shape and affine. `artifacts/` and NIfTI files are ignored by Git.
