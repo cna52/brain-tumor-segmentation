@@ -35,6 +35,6 @@ curl -L --fail -o artifacts/sam_vit_b_01ec64.pth https://dl.fbaipublicfiles.com/
 
 The split is fixed in `splits/patients.json`. Training includes every axial training slice, including empty slices. Validation patients select the checkpoint, thresholds, connected-component size, and box padding. Test labels are loaded only by the final `test` command for metrics. Inference functions use no labels. The output masks restore source shape and affine. `artifacts/` and NIfTI files are ignored by Git.
 
-See [plan](docs/plan.md) and [results](docs/results.md) for recorded execution status and findings.
+See [plan](docs/plan.md) and [results](docs/results.md) for recorded execution status and findings. Proposed portfolio extensions are in the [extension roadmap](docs/extension-plan.md).
 
 The complete 72-patient held-out comparison found mean whole-volume Dice of 0.7931 for the U-Net and 0.7566 for U-Net plus frozen SAM. SAM increased mean tumour recall from 0.7768 to 0.8113 and mean false-positive volume from 12.85 to 31.85 mL. See `docs/results.md` for every patient and `metrics/results.json` for machine-readable values.
