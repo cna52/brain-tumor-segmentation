@@ -35,6 +35,29 @@ curl -L --fail -o artifacts/sam_vit_b_01ec64.pth https://dl.fbaipublicfiles.com/
 
 The split is fixed in `splits/patients.json`. Training includes every axial training slice, including empty slices. Validation patients select the checkpoint, thresholds, connected-component size, and box padding. Test labels are loaded only by the final `test` command for metrics. Inference functions use no labels. The output masks restore source shape and affine. `artifacts/` and NIfTI files are ignored by Git.
 
+## Predict one unlabelled volume
+
+After training, run the locked U-Net on a 3D FLAIR NIfTI volume. For Task01's 4D images, select its verified FLAIR channel explicitly:
+
+```bash
+.venv/bin/python -m brain_tumor.predict \
+  --input ../brain-tumor-data/Task01_BrainTumour/imagesTs/BRATS_557.nii.gz \
+  --flair-channel 0 \
+  --output-dir artifacts/demo_557
+```
+
+Add `--sam-checkpoint artifacts/sam_vit_b_01ec64.pth` to produce the SAM refinement too. The command reads no label or manifest, writes `unet.nii.gz`, `unet_cleaned.nii.gz`, optionally `unet_sam.nii.gz`, and a `run.json` record with hashes and timings. These masks retain the input volume's spatial shape and affine. The trained checkpoint is not published in Git; train it with the reproduction commands above. Load only checkpoints from sources you trust.
+
+## What the masks look like
+
+![FLAIR, ground truth, U-Net, and SAM overlays for one failure and one improvement](docs/figures/case_study.png)
+
+`BRATS_073` shows SAM adding false-positive tissue; `BRATS_198` shows SAM recovering tumour missed by the U-Net. The titles give **whole-volume** Dice, while the pictures show single slices chosen retrospectively for illustration. Green is true positive, pink false positive, and blue false negative. The boxes that prompt SAM come only from connected components of the U-Net candidate mask. See the [exploratory failure analysis](docs/failure_analysis.md) for patient-level relationships and [figure attribution](docs/figures/ATTRIBUTION.md) for the MSD CC BY-SA 4.0 source and adaptation notice. Rebuild the figure with:
+
+```bash
+.venv/bin/python scripts/render_case_study.py --data ../brain-tumor-data/Task01_BrainTumour
+```
+
 See [plan](docs/plan.md) and [results](docs/results.md) for recorded execution status and findings. Proposed portfolio extensions are in the [extension roadmap](docs/extension-plan.md).
 
 The complete 72-patient held-out comparison found mean whole-volume Dice of 0.7931 for the U-Net and 0.7566 for U-Net plus frozen SAM. SAM increased mean tumour recall from 0.7768 to 0.8113 and mean false-positive volume from 12.85 to 31.85 mL. See `docs/results.md` for every patient and `metrics/results.json` for machine-readable values.

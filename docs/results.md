@@ -331,6 +331,7 @@ On this fixed held-out split, frozen SAM reduced mean patient Dice relative to t
 ## Compute and limitations
 
 The SAM benchmark used 8 validation slices; mean 1.831 s/slice, median 0.828 s/slice, maximum observed device allocation 3980247040 bytes. The first call took 8.581 s. A steady all-slice projection was 2.69 hours. The held-out run invoked SAM on 4112 of 11160 slices and spent 1.18 hours in SAM refinement; per-patient times are in `metrics/results.json`.
+The MPS allocation was sampled after each synchronized slice prediction; it is not an intra-call peak-memory measurement. [PyTorch's MPS memory API](https://docs.pytorch.org/docs/stable/mps.html) exposes current and driver allocation but no peak statistic.
 Only FLAIR is used. This is a 2D model evaluated on a fixed patient split of one public dataset; the original unlabelled MSD test set has no labels for this evaluation. Box prompts are generated from U-Net predictions, so missed tumours cannot be recovered when a slice has no U-Net candidate. SAM was trained on natural images and was used frozen. Validation choices are limited to the documented grids. These findings do not establish clinical performance or external generalization.
 
 ## Reproduction

@@ -66,6 +66,8 @@ def main():
                   f"The held-out run invoked SAM on {sum(x['sam_prompted_slices'] for x in result['patients'])} of "
                   f"{sum(x['slice_count'] for x in result['patients'])} slices and spent "
                   f"{sum(x['sam_seconds'] for x in result['patients'])/3600:.2f} hours in SAM refinement; per-patient times are in `metrics/results.json`.",
+                  "The MPS allocation was sampled after each synchronized slice prediction; it is not an intra-call peak-memory measurement. "
+                  "[PyTorch's MPS memory API](https://docs.pytorch.org/docs/stable/mps.html) exposes current and driver allocation but no peak statistic.",
                   "Only FLAIR is used. This is a 2D model evaluated on a fixed patient split of one public dataset; "+
                   "the original unlabelled MSD test set has no labels for this evaluation. Box prompts are generated from U-Net predictions, " +
                   "so missed tumours cannot be recovered when a slice has no U-Net candidate. SAM was trained on natural images and was used frozen. " +

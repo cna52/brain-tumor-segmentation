@@ -1,6 +1,6 @@
 # Portfolio extension roadmap
 
-Status: proposed. The completed experiment and its locked 72-patient result remain in [results.md](results.md). These tasks have not been implemented or evaluated.
+Status: milestones 1–3 complete; milestone 4 remains optional and pending. The completed experiment and its locked 72-patient result remain in [results.md](results.md).
 
 ## Goal and order
 
@@ -45,3 +45,10 @@ Make the existing work easy to run and inspect, then explain why frozen SAM redu
 ## Resume evidence to produce
 
 Milestones 1–2 should provide a runnable demonstration and clear public artifact. Milestone 3 should show evidence-based debugging. Milestone 4 can support a new comparative result only after its evaluation gate passes. Update resume claims only for completed, measured work; describe the original SAM finding accurately.
+
+## Execution notes
+
+- **Milestone 1:** `python -m brain_tumor.predict` now accepts 3D FLAIR or an explicitly selected 4D channel and writes label-free masks plus `run.json`. Unit tests and a real unlabelled Task01 case passed. The trained checkpoint stays outside Git; there is no public checkpoint download. PyTorch's MPS API exposes current/driver allocation but no peak statistic, so the original benchmark remains explicitly labelled maximum observed allocation.
+- **Milestone 2:** `scripts/render_case_study.py` generated and visually checked [the two-case figure](figures/case_study.png). MSD's dataset metadata and site identify CC BY-SA 4.0; [attribution](figures/ATTRIBUTION.md) records the adaptation. The displayed cases are retrospective illustrations of the original result.
+- **Milestone 3:** `scripts/analyze_failures.py` recomputed candidate masks for every original test patient and required an exact match with the saved locked masks before measuring box coverage. It generated [the exploratory report](failure_analysis.md), [patient-level metrics](../metrics/failure_analysis.json), and an SVG scatter plot. This analysis did not change the locked selection or headline test result.
+- **Milestone 4:** external-cohort access, licence, overlap, storage, and compute checks must precede any MedSAM comparison. No new model result is claimed.
