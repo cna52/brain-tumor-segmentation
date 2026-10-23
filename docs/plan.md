@@ -22,3 +22,4 @@
 - 2026-10-22: Report the negative held-out SAM Dice result alongside its higher tumour recall and false-positive volume. No additional tuning was performed after test evaluation.
 - 2026-10-22: Keep portfolio failure analysis explicitly retrospective and exploratory; it uses the known test outcomes for explanation only. Preserve the original results and selection files.
 - 2026-10-22: Do not publish the trained checkpoint without a separate rights and distribution review. The public figure is an adapted MSD Task01 visualization with CC BY-SA 4.0 attribution.
+- 2026-10-22: BraTS-Africa at TCIA is a possible external cohort for the optional MedSAM extension. Its processed labelled package requires IBM Aspera Connect; access, extraction size, label mapping, and patient overlap remain unverified. Do not claim an external result yet.
